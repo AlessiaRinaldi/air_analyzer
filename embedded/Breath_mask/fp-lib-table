@@ -1,0 +1,4 @@
+(fp_lib_table
+	(version 7)
+	(lib (name "impronte_breath_mask") (type "KiCad") (uri "${KIPRJMOD}/impronte_breath_mask.pretty") (options "") (descr ""))
+)
