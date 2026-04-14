@@ -6617,7 +6617,7 @@
 		(property "Reference" "C1"
 			(at 2.025 0.4 90)
 			(layer "F.SilkS")
-			(uuid "5caebd70-ac55-403d-8a51-ddbbf38fe873")
+			(uuid "e38d2045-c12d-4481-9798-536e90da0698")
 			(effects
 				(font
 					(size 1 1)
@@ -6628,7 +6628,7 @@
 		(property "Value" "100n"
 			(at 0 1.43 0)
 			(layer "F.Fab")
-			(uuid "2cb99836-0887-486f-a9fa-2475c3ca318c")
+			(uuid "51a76bb0-7ba7-4656-bcbf-9ee5fc5d95df")
 			(effects
 				(font
 					(size 1 1)
@@ -6640,7 +6640,7 @@
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "549079dc-9cf4-473b-8ad0-46912229b88a")
+			(uuid "68a292a4-ce43-4670-bf1d-af3fdd377459")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6651,7 +6651,7 @@
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "a7cc27c2-671e-41b1-b728-32ef7c23cb67")
+			(uuid "5d3e75b2-d46c-4111-959a-13d6183782d8")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7528,7 +7528,7 @@
 		(property "Reference" "R4"
 			(at -0.8 1.6 90)
 			(layer "F.SilkS")
-			(uuid "3300fb7a-efeb-46d9-ad4a-92a1efcbd0ed")
+			(uuid "60716cf8-66db-4122-874b-f59876ea0e48")
 			(effects
 				(font
 					(size 1 1)
@@ -7539,7 +7539,7 @@
 		(property "Value" "5.1k"
 			(at 0 1.43 0)
 			(layer "F.Fab")
-			(uuid "e740b581-40fc-4ea6-a433-eebf1dd373da")
+			(uuid "56c1d32f-a5f9-471b-a4c2-5db0de21e561")
 			(effects
 				(font
 					(size 1 1)
@@ -7551,7 +7551,7 @@
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "ac17e2e5-48c7-44dd-97cc-eda0a8a77b15")
+			(uuid "e109d1e2-d760-43d2-9447-0e13e4f66890")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7562,7 +7562,7 @@
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
-			(uuid "a134c64f-2977-43a7-8f91-8f8f1648c35d")
+			(uuid "b3903838-565e-49ef-881b-4361d6eb0860")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9443,7 +9443,7 @@
 			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "111ef241-abaa-46e9-95a8-17e123a1f865")
+			(uuid "77ad51e9-0fcf-4d07-9884-5f5cd3a045b1")
 			(effects
 				(font
 					(size 1.5 1.5)
@@ -9455,7 +9455,7 @@
 			(at 0.75 0 0)
 			(layer "F.SilkS")
 			(hide yes)
-			(uuid "697a073e-ddf5-4c2d-afae-d48c0dd92d61")
+			(uuid "c9fc513b-6401-447c-90ea-34d813ddd04a")
 			(effects
 				(font
 					(size 1.5 1.5)
@@ -9467,7 +9467,7 @@
 			(at 0 0 0)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "5afa57d4-57f2-467f-8b4a-a13b2559f2b3")
+			(uuid "e221e77d-e12f-4937-896e-d6decb583777")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9479,7 +9479,7 @@
 			(at 0 0 0)
 			(layer "B.Fab")
 			(hide yes)
-			(uuid "ec23690e-2949-4c80-819c-a1ca0b6d660f")
+			(uuid "faf668d6-2aa2-4792-8ddb-5e0b2dd8e732")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11494,20 +11494,8 @@
 		(layer "Edge.Cuts")
 		(uuid "35266830-d59b-4036-8f29-82eaa8388601")
 	)
-	(gr_text "Breath Mask Board"
-		(at 109.4 81.8 0)
-		(layer "F.SilkS")
-		(uuid "4eaae91f-fa74-49ee-ae20-bd96dd586a0e")
-		(effects
-			(font
-				(size 1 1)
-				(thickness 0.15)
-			)
-			(justify left bottom)
-		)
-	)
 	(gr_text "Anna Dal Mas, Alessia Rinaldi"
-		(at 127.4 50.8 0)
+		(at 127.090417 52.536382 0)
 		(layer "B.SilkS")
 		(uuid "37aa7f8e-4a8f-4113-8a3b-f3b533193d66")
 		(effects
@@ -11519,7 +11507,7 @@
 		)
 	)
 	(gr_text "Low-Power Embedded Systems Project"
-		(at 131.2 48.8 0)
+		(at 130.890417 50.536382 0)
 		(layer "B.SilkS")
 		(uuid "4a2d7d07-55e4-480a-b088-72e9451811b4")
 		(effects
