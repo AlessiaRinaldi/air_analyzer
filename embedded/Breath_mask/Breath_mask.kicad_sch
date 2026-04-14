@@ -4469,10 +4469,6 @@
 		(uuid "094ef796-182d-49cd-a81a-eba0caf371c2")
 	)
 	(no_connect
-		(at 201.93 148.59)
-		(uuid "096a4cf9-68c4-4907-9fb6-98f3e65cd399")
-	)
-	(no_connect
 		(at 223.52 242.57)
 		(uuid "1fc20a6c-133d-4620-9e78-a64d4522a73a")
 	)
@@ -4495,10 +4491,6 @@
 	(no_connect
 		(at 201.93 163.83)
 		(uuid "61590278-d69f-41bb-b3bc-397660fa91d4")
-	)
-	(no_connect
-		(at 201.93 146.05)
-		(uuid "61ee2238-b888-44c1-a060-54c9f94efb0d")
 	)
 	(no_connect
 		(at 201.93 158.75)
@@ -5238,6 +5230,16 @@
 		)
 		(uuid "63c28bb7-39de-43f2-a14c-8652cb22fe1b")
 	)
+	(wire
+		(pts
+			(xy 190.5 148.59) (xy 201.93 148.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "663ff4d7-39dc-4d88-a96d-3212231729fd")
+	)
 	(polyline
 		(pts
 			(xy 306.07 36.83) (xy 306.07 101.6)
@@ -5747,6 +5749,16 @@
 			(type default)
 		)
 		(uuid "ad05705c-4015-40e4-aa20-9e94a63f2c3f")
+	)
+	(wire
+		(pts
+			(xy 190.5 146.05) (xy 201.93 146.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ad4b9d90-d7dd-45b6-88d8-1b6efa898ba7")
 	)
 	(wire
 		(pts
@@ -6648,6 +6660,16 @@
 		)
 		(uuid "dd1553ad-0e75-417b-a68b-20133426b2da")
 	)
+	(label "~{HOLD}"
+		(at 190.5 146.05 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "de50c980-d724-47fd-8008-1b8d8d1776d8")
+	)
 	(label "USB_F"
 		(at 259.08 135.89 180)
 		(effects
@@ -6667,6 +6689,16 @@
 			(justify left bottom)
 		)
 		(uuid "e368cb60-17fc-4c3b-ae93-c2901c9822c0")
+	)
+	(label "~{W}"
+		(at 190.5 148.59 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e7008f10-d724-454d-b979-bf97a20268ef")
 	)
 	(label "SPI1_MOSI"
 		(at 358.14 152.4 180)
