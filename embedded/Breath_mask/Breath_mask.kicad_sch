@@ -7168,6 +7168,17 @@
 				)
 			)
 		)
+		(property "LCSC" "C222404"
+			(at 217.17 156.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "13"
 			(uuid "ecd02cf5-637f-460b-b0a4-0a60110a498f")
 		)
