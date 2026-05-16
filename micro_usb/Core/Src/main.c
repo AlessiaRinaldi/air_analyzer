@@ -35,7 +35,14 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+/* Modifica le etichette dei PIN/PORT in base a come li hai nominati su CubeMX */
+#define SENSOR_CS_PORT GPIOA
+#define SENSOR_CS_PIN  GPIO_PIN_4
 
+#define MEM_CS_PORT    GPIOB
+#define MEM_CS_PIN     GPIO_PIN_12
+
+#define DATA_SIZE      2 /* Dimensione in byte dei dati del sensore */
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -46,7 +53,10 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+extern SPI_HandleTypeDef hspi1; 
 
+uint8_t sensor_tx_buf[DATA_SIZE] = {0x00, 0x00}; /* Buffer di trasmissione dummy per far generare il clock al DMA */
+uint8_t sensor_rx_buf[DATA_SIZE] = {0};          /* Buffer in cui il DMA salva i dati letti dal sensore */
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -94,6 +104,17 @@ int main(void)
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
 
+  /* 1. Assert del chip select del sensore di pressione (Attivo Basso) */
+  HAL_GPIO_WritePin(SENSOR_CS_PORT, SENSOR_CS_PIN, GPIO_PIN_RESET);
+
+  /* 2. Configurazione del sensore */
+  /* (Esempio: invio un comando di setup iniziale, adatta i byte al datasheet del tuo sensore) */
+  uint8_t config_cmd[2] = {0x20, 0x80}; 
+  HAL_SPI_Transmit(&hspi1, config_cmd, 2, HAL_MAX_DELAY);
+
+  /* 3. Inizio trasferimento SPI con DMA per la prima acquisizione */
+  HAL_SPI_TransmitReceive_DMA(&hspi1, sensor_tx_buf, sensor_rx_buf, DATA_SIZE);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -103,6 +124,8 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+    /* Mette la CPU in Sleep Mode finché non si verifica un Interrupt (es. fine trasferimento DMA) */
+    __WFI(); 
   }
   /* USER CODE END 3 */
 }
@@ -158,6 +181,44 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 
+/**
+  * @brief  SPI Transfer Completed Callback
+  * @param  hspi: SPI handle
+  * @retval None
+  */
+void HAL_SPI_TxRxCpltCallback(SPI_HandleTypeDef *hspi)
+{
+  /* Verifichiamo che l'interrupt provenga dal bus SPI corretto */
+  if (hspi->Instance == SPI1) 
+  {
+    /* I dati acquisiti sono già disponibili in 'sensor_rx_buf' */
+
+    /* 1. Deassert del chip select del sensore di pressione */
+    HAL_GPIO_WritePin(SENSOR_CS_PORT, SENSOR_CS_PIN, GPIO_PIN_SET);
+
+    /* 2. Assert del chip select della memoria esterna */
+    HAL_GPIO_WritePin(MEM_CS_PORT, MEM_CS_PIN, GPIO_PIN_RESET);
+
+    /* 3. Scrivo i dati in memoria */
+    /* (Formattazione del comando di scrittura per la memoria SPI) */
+    uint8_t mem_write_cmd[3];
+    mem_write_cmd[0] = 0x02; /* Codice operativo di Write fittizio */
+    mem_write_cmd[1] = sensor_rx_buf[0];
+    mem_write_cmd[2] = sensor_rx_buf[1];
+    
+    HAL_SPI_Transmit(hspi, mem_write_cmd, 3, 10); 
+
+    /* 4. Deassert del chip select della memoria */
+    HAL_GPIO_WritePin(MEM_CS_PORT, MEM_CS_PIN, GPIO_PIN_SET);
+
+    /* 5. Assert del chip select del sensore di pressione per preparare la prossima lettura */
+    HAL_GPIO_WritePin(SENSOR_CS_PORT, SENSOR_CS_PIN, GPIO_PIN_RESET);
+
+    /* 6. Restart del trasferimento DMA per la successiva acquisizione */
+    HAL_SPI_TransmitReceive_DMA(hspi, sensor_tx_buf, sensor_rx_buf, DATA_SIZE);
+  }
+}
+
 /* USER CODE END 4 */
 
 /**
@@ -177,7 +238,7 @@ void Error_Handler(void)
 #ifdef USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
-  *         where the assert_param error has occurred.
+  * where the assert_param error has occurred.
   * @param  file: pointer to the source file name
   * @param  line: assert_param error line source number
   * @retval None
