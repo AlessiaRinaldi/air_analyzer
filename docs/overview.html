@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c48590b37e975bf214e746d0531a66bc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-0d0bcf52b549891f408534f49f129a55.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -191,9 +191,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a>
+  <li><a href="#project-overview" id="toc-project-overview" class="nav-link active" data-scroll-target="#project-overview">Project Overview</a>
   <ul class="collapse">
-  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
+  <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation">Motivation</a></li>
+  <li><a href="#main-idea" id="toc-main-idea" class="nav-link" data-scroll-target="#main-idea">Main Idea</a></li>
+  <li><a href="#system-concept" id="toc-system-concept" class="nav-link" data-scroll-target="#system-concept">System Concept</a></li>
+  <li><a href="#design-goals" id="toc-design-goals" class="nav-link" data-scroll-target="#design-goals">Design Goals</a></li>
+  <li><a href="#key-design-choices" id="toc-key-design-choices" class="nav-link" data-scroll-target="#key-design-choices">Key Design Choices</a>
+  <ul class="collapse">
+  <li><a href="#direct-pressure-sensing" id="toc-direct-pressure-sensing" class="nav-link" data-scroll-target="#direct-pressure-sensing">Direct Pressure Sensing</a></li>
+  <li><a href="#offline-data-storage" id="toc-offline-data-storage" class="nav-link" data-scroll-target="#offline-data-storage">Offline Data Storage</a></li>
+  <li><a href="#low-power-interrupt-driven-firmware" id="toc-low-power-interrupt-driven-firmware" class="nav-link" data-scroll-target="#low-power-interrupt-driven-firmware">Low-Power Interrupt-Driven Firmware</a></li>
+  </ul></li>
+  <li><a href="#main-components" id="toc-main-components" class="nav-link" data-scroll-target="#main-components">Main Components</a></li>
+  <li><a href="#repository-structure" id="toc-repository-structure" class="nav-link" data-scroll-target="#repository-structure">Repository Structure</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -220,19 +231,105 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="overview" class="level1">
-<h1>Overview</h1>
-<p>Air Analyzer is a wearable embedded system for monitoring breathing-related activity.</p>
-<p>The project is based on a microcontroller architecture and focuses on real-time acquisition, signal handling, and firmware organization.</p>
-<section id="objectives" class="level2">
-<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+<section id="project-overview" class="level1">
+<h1>Project Overview</h1>
+<p><strong>Air Analyzer</strong> is a low-power wearable system designed for respiratory activity monitoring during physical exercise. The device is integrated into a sports mask and uses an embedded microcontroller-based architecture to acquire pressure-related breathing signals, store data locally, and allow post-session data retrieval through USB.</p>
+<p>The main objective of the project is to provide a compact, non-invasive, and energy-efficient solution for monitoring breathing patterns in athletes and during physical activity.</p>
+<hr>
+<section id="motivation" class="level2">
+<h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
+<p>Respiratory activity is an important physiological indicator during exercise. Breathing frequency and breathing patterns can provide useful information about physical effort, fatigue level, and cardiopulmonary response to training.</p>
+<p>Many existing respiratory monitoring systems are either too bulky for sport applications, uncomfortable during movement, expensive, or dependent on wireless communication. These limitations reduce their usability in real exercise conditions.</p>
+<p>Air Analyzer addresses these issues by combining:</p>
 <ul>
-<li>Acquire data from the selected sensor.</li>
-<li>Process the acquired signal on the microcontroller.</li>
-<li>Detect useful information related to breathing activity.</li>
-<li>Manage the firmware using an interrupt-based approach.</li>
-<li>Provide clear and reproducible documentation.</li>
+<li>direct pressure sensing inside a sports mask;</li>
+<li>local data storage;</li>
+<li>low-power firmware management;</li>
+<li>USB-based post-session data retrieval;</li>
+<li>a compact custom PCB suitable for wearable integration.</li>
 </ul>
+<hr>
+</section>
+<section id="main-idea" class="level2">
+<h2 class="anchored" data-anchor-id="main-idea">Main Idea</h2>
+<p>The key idea of Air Analyzer is to place a barometric pressure sensor inside a sports mask in order to detect the small pressure variations caused by inhalation and exhalation.</p>
+<p>Instead of continuously transmitting data through Bluetooth or Wi-Fi, the system stores the acquired samples locally inside an EEPROM memory. After the recording session, the user can connect the device to a PC through USB-C and retrieve the stored data for offline analysis.</p>
+<p>This design choice reduces power consumption and makes the system suitable for battery-powered operation.</p>
+<hr>
+</section>
+<section id="system-concept" class="level2">
+<h2 class="anchored" data-anchor-id="system-concept">System Concept</h2>
+<p>The system is based on the following workflow:</p>
+<pre class="text"><code>Breathing activity
+        ↓
+Pressure variation inside the mask
+        ↓
+LPS22HBTR barometric pressure sensor
+        ↓
+STM32L052 microcontroller
+        ↓
+SPI EEPROM local memory
+        ↓
+USB-C data retrieval
+        ↓
+Offline analysis</code></pre>
+<hr>
+</section>
+<section id="design-goals" class="level2">
+<h2 class="anchored" data-anchor-id="design-goals">Design Goals</h2>
+<p>The main goals of the project are:</p>
+<ul>
+<li>acquire respiratory-related pressure signals during physical activity;</li>
+<li>reduce power consumption through an interrupt-driven firmware strategy;</li>
+<li>avoid continuous wireless transmission;</li>
+<li>store data locally during the recording session;</li>
+<li>retrieve data after the session through USB-C;</li>
+<li>design a compact PCB suitable for integration into a sports mask;</li>
+<li>provide a reproducible hardware and firmware platform.</li>
+</ul>
+<hr>
+</section>
+<section id="key-design-choices" class="level2">
+<h2 class="anchored" data-anchor-id="key-design-choices">Key Design Choices</h2>
+<p>Air Analyzer is based on three main design choices.</p>
+<section id="direct-pressure-sensing" class="level3">
+<h3 class="anchored" data-anchor-id="direct-pressure-sensing">Direct Pressure Sensing</h3>
+<p>The pressure sensor is placed directly inside the mask. This allows the system to detect breathing-related pressure variations without requiring chest belts, skin-contact electrodes, or external laboratory equipment.</p>
+</section>
+<section id="offline-data-storage" class="level3">
+<h3 class="anchored" data-anchor-id="offline-data-storage">Offline Data Storage</h3>
+<p>The system stores data locally on an SPI EEPROM. This avoids the need for continuous Bluetooth or Wi-Fi transmission, reducing energy consumption and simplifying the device architecture.</p>
+</section>
+<section id="low-power-interrupt-driven-firmware" class="level3">
+<h3 class="anchored" data-anchor-id="low-power-interrupt-driven-firmware">Low-Power Interrupt-Driven Firmware</h3>
+<p>The microcontroller spends most of the time in a low-power mode and wakes up only when needed. The sensor FIFO generates an interrupt when enough samples are available, allowing the firmware to read data in bursts instead of continuously polling the sensor.</p>
+<hr>
+</section>
+</section>
+<section id="main-components" class="level2">
+<h2 class="anchored" data-anchor-id="main-components">Main Components</h2>
+<p>The project includes three main parts:</p>
+<ul>
+<li><strong>Hardware</strong>: custom PCB with microcontroller, pressure sensor, EEPROM memory, power supply, and USB-C interface.</li>
+<li><strong>Firmware</strong>: interrupt-based embedded software for sensor acquisition, data storage, and communication.</li>
+<li><strong>Mechanical integration</strong>: sports mask structure designed to host the PCB and position the sensor correctly.</li>
+</ul>
+<hr>
+</section>
+<section id="repository-structure" class="level2">
+<h2 class="anchored" data-anchor-id="repository-structure">Repository Structure</h2>
+<p>The repository is organized as follows:</p>
+<pre class="text"><code>air_analyzer/
+├── embedded/
+├── micro_usb/
+├── docs/
+├── index.qmd
+├── overview.qmd
+├── hardware.qmd
+├── firmware.qmd
+├── usage.qmd
+└── README.md</code></pre>
+<p>The firmware implementation is mainly located inside the <code>micro_usb/</code> directory, while the Quarto documentation is generated inside the <code>docs/</code> folder.</p>
 
 
 </section>

@@ -1,38 +1,105 @@
 /*-- scss:defaults --*/
 
-$body-bg: #ffffff;
-$body-color: #222222;
-$link-color: #2b6cb0;
-$sidebar-bg: #f7f8fa;
+// Main colors
+$body-bg: #edf3f7;
+$body-color: #1c2f3a;
+$link-color: #3f6f8f;
+
+// Sidebar
+$sidebar-bg: #c9d9e3;
+
+// Typography
+$font-family-sans-serif: "Segoe UI", Arial, sans-serif;
 
 /*-- scss:rules --*/
 
 h1, h2, h3 {
+  color: #243f4f;
   font-weight: 700;
 }
 
+a {
+  color: #3f6f8f;
+}
+
+a:hover {
+  color: #2d536b;
+}
+
+/* Sidebar title */
 .sidebar-title {
+  color: #1f3847;
   font-weight: 700;
 }
 
-.quarto-title-banner {
-  background: #f7f8fa;
+/* Sidebar */
+.sidebar {
+  background-color: #c9d9e3;
 }
 
+/* Sidebar links */
+.sidebar .sidebar-item-text,
+.sidebar a {
+  color: #243f4f;
+}
+
+.sidebar a:hover {
+  color: #1c2f3a;
+}
+
+/* Page title area */
+.quarto-title-banner {
+  background: #b7ccd9;
+  color: #1c2f3a;
+}
+
+/* Cards on homepage */
 .card {
-  border: 1px solid #e5e7eb;
-  border-radius: 14px;
+  border: 1px solid #9eb7c6;
+  border-radius: 16px;
   padding: 1.2rem;
   margin-bottom: 1rem;
-  background: #ffffff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  background: #f8fbfc;
+  box-shadow: 0 4px 14px rgba(36, 63, 79, 0.14);
 }
 
 .card h3 {
   margin-top: 0;
+  color: #243f4f;
 }
 
 .card a {
   font-weight: 600;
   text-decoration: none;
+  color: #3f6f8f;
+}
+
+.card a:hover {
+  color: #2d536b;
+  text-decoration: underline;
+}
+
+/* Code blocks */
+pre {
+  border-radius: 12px;
+  border: 1px solid #aac0cd;
+}
+
+/* Tables */
+table {
+  border-color: #9eb7c6;
+}
+
+thead {
+  background-color: #d5e3eb;
+}
+/* Extend the right-side background to the edge of the page */
+body {
+  background: linear-gradient(
+    to right,
+    #edf3f7 0%,
+    #edf3f7 82%,
+    #c9d9e3 82%,
+    #c9d9e3 100%
+  );
 }

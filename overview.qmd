@@ -2,16 +2,120 @@
 title: "Overview"
 ---
 
-# Overview
+# Project Overview
 
-Air Analyzer is a wearable embedded system for monitoring breathing-related activity.
+**Air Analyzer** is a low-power wearable system designed for respiratory activity monitoring during physical exercise.
+The device is integrated into a sports mask and uses an embedded microcontroller-based architecture to acquire pressure-related breathing signals, store data locally, and allow post-session data retrieval through USB.
 
-The project is based on a microcontroller architecture and focuses on real-time acquisition, signal handling, and firmware organization.
+The main objective of the project is to provide a compact, non-invasive, and energy-efficient solution for monitoring breathing patterns in athletes and during physical activity.
 
-## Objectives
+---
 
-- Acquire data from the selected sensor.
-- Process the acquired signal on the microcontroller.
-- Detect useful information related to breathing activity.
-- Manage the firmware using an interrupt-based approach.
-- Provide clear and reproducible documentation.
+## Motivation
+
+Respiratory activity is an important physiological indicator during exercise. Breathing frequency and breathing patterns can provide useful information about physical effort, fatigue level, and cardiopulmonary response to training.
+
+Many existing respiratory monitoring systems are either too bulky for sport applications, uncomfortable during movement, expensive, or dependent on wireless communication. These limitations reduce their usability in real exercise conditions.
+
+Air Analyzer addresses these issues by combining:
+
+- direct pressure sensing inside a sports mask;
+- local data storage;
+- low-power firmware management;
+- USB-based post-session data retrieval;
+- a compact custom PCB suitable for wearable integration.
+
+---
+
+## Main Idea
+
+The key idea of Air Analyzer is to place a barometric pressure sensor inside a sports mask in order to detect the small pressure variations caused by inhalation and exhalation.
+
+Instead of continuously transmitting data through Bluetooth or Wi-Fi, the system stores the acquired samples locally inside an EEPROM memory. After the recording session, the user can connect the device to a PC through USB-C and retrieve the stored data for offline analysis.
+
+This design choice reduces power consumption and makes the system suitable for battery-powered operation.
+
+---
+
+## System Concept
+
+The system is based on the following workflow:
+
+```text
+Breathing activity
+        ↓
+Pressure variation inside the mask
+        ↓
+LPS22HBTR barometric pressure sensor
+        ↓
+STM32L052 microcontroller
+        ↓
+SPI EEPROM local memory
+        ↓
+USB-C data retrieval
+        ↓
+Offline analysis
+```
+
+---
+
+## Design Goals
+
+The main goals of the project are:
+
+- acquire respiratory-related pressure signals during physical activity;
+- reduce power consumption through an interrupt-driven firmware strategy;
+- avoid continuous wireless transmission;
+- store data locally during the recording session;
+- retrieve data after the session through USB-C;
+- design a compact PCB suitable for integration into a sports mask;
+- provide a reproducible hardware and firmware platform.
+
+---
+
+## Key Design Choices
+
+Air Analyzer is based on three main design choices.
+
+### Direct Pressure Sensing
+
+The pressure sensor is placed directly inside the mask. This allows the system to detect breathing-related pressure variations without requiring chest belts, skin-contact electrodes, or external laboratory equipment.
+
+### Offline Data Storage
+
+The system stores data locally on an SPI EEPROM. This avoids the need for continuous Bluetooth or Wi-Fi transmission, reducing energy consumption and simplifying the device architecture.
+
+### Low-Power Interrupt-Driven Firmware
+
+The microcontroller spends most of the time in a low-power mode and wakes up only when needed. The sensor FIFO generates an interrupt when enough samples are available, allowing the firmware to read data in bursts instead of continuously polling the sensor.
+
+---
+
+## Main Components
+
+The project includes three main parts:
+
+- **Hardware**: custom PCB with microcontroller, pressure sensor, EEPROM memory, power supply, and USB-C interface.
+- **Firmware**: interrupt-based embedded software for sensor acquisition, data storage, and communication.
+- **Mechanical integration**: sports mask structure designed to host the PCB and position the sensor correctly.
+
+---
+
+## Repository Structure
+
+The repository is organized as follows:
+
+```text
+air_analyzer/
+├── embedded/
+├── micro_usb/
+├── docs/
+├── index.qmd
+├── overview.qmd
+├── hardware.qmd
+├── firmware.qmd
+├── usage.qmd
+└── README.md
+```
+
+The firmware implementation is mainly located inside the `micro_usb/` directory, while the Quarto documentation is generated inside the `docs/` folder.

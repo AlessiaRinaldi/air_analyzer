@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c48590b37e975bf214e746d0531a66bc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-0d0bcf52b549891f408534f49f129a55.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -191,11 +191,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#hardware-architecture" id="toc-hardware-architecture" class="nav-link active" data-scroll-target="#hardware-architecture">Hardware architecture</a>
-  <ul class="collapse">
-  <li><a href="#main-components" id="toc-main-components" class="nav-link" data-scroll-target="#main-components">Main components</a></li>
-  <li><a href="#hardware-block-diagram" id="toc-hardware-block-diagram" class="nav-link" data-scroll-target="#hardware-block-diagram">Hardware block diagram</a></li>
-  </ul></li>
+  <li><a href="#hardware-architecture" id="toc-hardware-architecture" class="nav-link active" data-scroll-target="#hardware-architecture">Hardware Architecture</a></li>
+  <li><a href="#main-components" id="toc-main-components" class="nav-link" data-scroll-target="#main-components">Main Components</a></li>
+  <li><a href="#microcontroller" id="toc-microcontroller" class="nav-link" data-scroll-target="#microcontroller">Microcontroller</a></li>
+  <li><a href="#pressure-sensor" id="toc-pressure-sensor" class="nav-link" data-scroll-target="#pressure-sensor">Pressure Sensor</a></li>
+  <li><a href="#external-memory" id="toc-external-memory" class="nav-link" data-scroll-target="#external-memory">External Memory</a></li>
+  <li><a href="#power-supply" id="toc-power-supply" class="nav-link" data-scroll-target="#power-supply">Power Supply</a></li>
+  <li><a href="#usb-c-interface" id="toc-usb-c-interface" class="nav-link" data-scroll-target="#usb-c-interface">USB-C Interface</a></li>
+  <li><a href="#pcb-design" id="toc-pcb-design" class="nav-link" data-scroll-target="#pcb-design">PCB Design</a></li>
+  <li><a href="#pcb-design-choices" id="toc-pcb-design-choices" class="nav-link" data-scroll-target="#pcb-design-choices">PCB Design Choices</a></li>
+  <li><a href="#sampling-strategy" id="toc-sampling-strategy" class="nav-link" data-scroll-target="#sampling-strategy">Sampling Strategy</a></li>
+  <li><a href="#hardware-summary" id="toc-hardware-summary" class="nav-link" data-scroll-target="#hardware-summary">Hardware Summary</a></li>
   </ul>
 </nav>
     </div>
@@ -221,25 +227,284 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="hardware-architecture" class="level1">
-<h1>Hardware architecture</h1>
 <p>This section describes the hardware architecture of the Air Analyzer system.</p>
-<section id="main-components" class="level2">
-<h2 class="anchored" data-anchor-id="main-components">Main components</h2>
+<p>The device is based on a compact embedded board designed to acquire breathing-related pressure variations inside a sports mask, store the acquired data locally, and allow data retrieval through USB-C.</p>
+<hr>
+<section id="hardware-architecture" class="level1">
+<h1>Hardware Architecture</h1>
+<p>The hardware system is composed of the following main blocks:</p>
+<pre class="text"><code>CR2032 Battery
+      ↓
+Power Management Stage
+      ↓
+3.3 V Regulated Supply
+      ↓
+STM32L052 Microcontroller
+      ↓
+SPI Bus
+ ┌───────────────┬───────────────┐
+ ↓               ↓
+LPS22HBTR        M95256 EEPROM
+Pressure Sensor  Memory
+      ↓
+USB-C Interface for Data Retrieval</code></pre>
+<p>The system is designed to be compact, low-power, and suitable for integration into a wearable mask.</p>
+<hr>
+</section>
+<section id="main-components" class="level1">
+<h1>Main Components</h1>
+<p>The electronic system is built around the following components.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>STM32L052K8Tx</strong></td>
+<td>Ultra-low-power ARM Cortex-M0+ microcontroller</td>
+</tr>
+<tr class="even">
+<td><strong>LPS22HBTR</strong></td>
+<td>Barometric pressure sensor used to detect breathing-related pressure variations</td>
+</tr>
+<tr class="odd">
+<td><strong>M95256</strong></td>
+<td>256 Kbit SPI EEPROM used for local data storage</td>
+</tr>
+<tr class="even">
+<td><strong>TPS61291</strong></td>
+<td>Low-power boost converter used to generate a regulated 3.3 V supply</td>
+</tr>
+<tr class="odd">
+<td><strong>CR2032 battery</strong></td>
+<td>Coin cell battery used as the main power source</td>
+</tr>
+<tr class="even">
+<td><strong>USB-C connector</strong></td>
+<td>Interface used for post-session data retrieval</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="microcontroller" class="level1">
+<h1>Microcontroller</h1>
+<p>The system uses the <strong>STM32L052K8Tx</strong>, an ultra-low-power microcontroller based on the ARM Cortex-M0+ core.</p>
+<p>This microcontroller was selected because it provides:</p>
 <ul>
-<li>Microcontroller board</li>
-<li>Breathing-related sensor interface</li>
-<li>Power supply system</li>
-<li>USB or serial communication interface</li>
+<li>low-power operating modes;</li>
+<li>STOP mode support;</li>
+<li>SPI communication peripherals;</li>
+<li>native USB Full Speed support;</li>
+<li>enough GPIO pins for sensor, memory, and control signals.</li>
 </ul>
+<p>The microcontroller manages the complete acquisition and storage workflow. It configures the pressure sensor, handles interrupts, reads pressure samples through SPI, and writes the acquired data to the external EEPROM.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Micro.png" class="img-fluid figure-img" style="width:45.0%" alt="STM32L052 microcontroller schematic"></p>
+<figcaption>STM32L052 microcontroller schematic</figcaption>
+</figure>
+</div>
+<p><em>STM32L052 microcontroller with the surrounding hardware required for correct operation.</em></p>
+<hr>
 </section>
-<section id="hardware-block-diagram" class="level2">
-<h2 class="anchored" data-anchor-id="hardware-block-diagram">Hardware block diagram</h2>
-<p>Add here a block diagram of the system.</p>
-<p>```text Sensor → Microcontroller → USB/Serial → PC</p>
+<section id="pressure-sensor" class="level1">
+<h1>Pressure Sensor</h1>
+<p>The selected pressure sensor is the <strong>LPS22HBTR</strong> from STMicroelectronics.</p>
+<p>This sensor is used to measure the small pressure variations generated by breathing inside the mask. These pressure variations are then used to identify inhalation and exhalation cycles.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/sensore_schematico.png" class="img-fluid figure-img" style="width:45.0%" alt="LPS22HBTR pressure sensor schematic"></p>
+<figcaption>LPS22HBTR pressure sensor schematic</figcaption>
+</figure>
+</div>
+<p><em>LPS22HBTR pressure sensor schematic section.</em></p>
+<p>Main characteristics:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sensor type</td>
+<td>Barometric pressure sensor</td>
+</tr>
+<tr class="even">
+<td>Pressure range</td>
+<td>260–1260 hPa</td>
+</tr>
+<tr class="odd">
+<td>Relative accuracy</td>
+<td>±0.1 hPa</td>
+</tr>
+<tr class="even">
+<td>Interface</td>
+<td>SPI</td>
+</tr>
+<tr class="odd">
+<td>SPI clock</td>
+<td>up to 10 MHz</td>
+</tr>
+<tr class="even">
+<td>FIFO</td>
+<td>32 levels</td>
+</tr>
+</tbody>
+</table>
+<p>The internal FIFO is important for the low-power strategy. Instead of forcing the microcontroller to read every sample immediately, the sensor can accumulate samples and generate an interrupt when the FIFO reaches a threshold.</p>
+<hr>
+</section>
+<section id="external-memory" class="level1">
+<h1>External Memory</h1>
+<p>The system uses an <strong>M95256 SPI EEPROM</strong> for local data storage.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/memoria_schematico.png" class="img-fluid figure-img" style="width:45.0%" alt="M95256 SPI EEPROM schematic"></p>
+<figcaption>M95256 SPI EEPROM schematic</figcaption>
+</figure>
+</div>
+<p><em>256 Kbit SPI EEPROM used for local pressure data storage.</em></p>
+<p>The memory size is:</p>
+<pre class="text"><code>256 Kbit = 32 KB</code></pre>
+<p>Each pressure sample is stored using 3 bytes, corresponding to the 24-bit raw pressure output of the sensor.</p>
+<p>At a sampling frequency of 8 Hz, the approximate recording duration is:</p>
+<pre class="text"><code>32,768 bytes / (3 bytes/sample × 8 samples/s) ≈ 1,365 s ≈ 22 min</code></pre>
+<p>This local storage approach avoids continuous wireless transmission and allows the user to download the data only after the recording session.</p>
+<hr>
+</section>
+<section id="power-supply" class="level1">
+<h1>Power Supply</h1>
+<p>The system is powered by a <strong>CR2032 coin cell battery</strong>.</p>
+<p>A <strong>TPS61291 boost converter</strong> is used to generate a regulated 3.3 V supply for the electronic components.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/alimentazione.png" class="img-fluid figure-img" style="width:45.0%" alt="Power supply schematic with boost converter"></p>
+<figcaption>Power supply schematic</figcaption>
+</figure>
+</div>
+<p><em>Power supply schematic section used to provide the regulated 3.3 V rail.</em></p>
+<p>The power supply stage is designed with low-power operation in mind. The objective is to allow the system to operate from a small battery while minimizing current consumption during inactive periods.</p>
+<hr>
+</section>
+<section id="usb-c-interface" class="level1">
+<h1>USB-C Interface</h1>
+<p>The USB-C connector is used for post-session communication with a PC.</p>
+<p>The system does not continuously stream data during the acquisition phase. Instead, data are stored locally during the recording session and retrieved later through USB.</p>
+<p>This design choice reduces power consumption and simplifies the use of the device during physical activity.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/USB-C.png" class="img-fluid figure-img" style="width:45.0%" alt="USB-C Interface schematic"></p>
+<figcaption>USB-C Interface schematic</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+<section id="pcb-design" class="level1">
+<h1>PCB Design</h1>
+<p>A custom <strong>50 × 50 mm two-layer PCB</strong> was designed for the project.</p>
+<p>The PCB integrates:</p>
+<ul>
+<li>microcontroller;</li>
+<li>pressure sensor;</li>
+<li>SPI EEPROM memory;</li>
+<li>power supply circuit;</li>
+<li>USB-C connector;</li>
+<li>battery connection;</li>
+<li>test points;</li>
+<li>mounting holes for mechanical integration.</li>
+</ul>
+<p><img src="images/pcb_front.png" class="img-fluid" style="width:40.0%" alt="PCB front view"> <img src="images/pcb_retro.png" class="img-fluid" style="width:40.0%" alt="PCB back view"></p>
+<p><em>Front and back view of the custom Air Analyzer PCB.</em></p>
+<p>The compact form factor makes the board suitable for integration into the sports mask.</p>
+<hr>
+</section>
+<section id="pcb-design-choices" class="level1">
+<h1>PCB Design Choices</h1>
+<p>Some important PCB design choices include:</p>
+<ul>
+<li><strong>33 Ω series resistors</strong> on SPI lines for signal integrity and EMI damping;</li>
+<li><strong>decoupling capacitors</strong> placed close to each IC power supply pin;</li>
+<li><strong>ground copper pour</strong> on both layers to reduce noise;</li>
+<li><strong>test points</strong> on unused GPIO pins for firmware debugging;</li>
+<li><strong>M2 mounting holes</strong> for mechanical integration with the mask.</li>
+</ul>
+<hr>
+</section>
+<section id="sampling-strategy" class="level1">
+<h1>Sampling Strategy</h1>
+<p>The expected respiratory signal has a relatively low frequency. During intense physical activity, breathing frequency can increase significantly, but it remains well below the selected sampling frequency.</p>
+<p>A sampling rate of 8 Hz was chosen because it provides enough margin to capture the breathing waveform while keeping memory usage and power consumption limited.</p>
+<p>This sampling rate allows the system to capture not only the breathing frequency, but also the general shape of the pressure waveform.</p>
+<hr>
+</section>
+<section id="hardware-summary" class="level1">
+<h1>Hardware Summary</h1>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Microcontroller</td>
+<td>STM32L052K8Tx</td>
+</tr>
+<tr class="even">
+<td>Pressure sensor</td>
+<td>LPS22HBTR</td>
+</tr>
+<tr class="odd">
+<td>Memory</td>
+<td>M95256 SPI EEPROM</td>
+</tr>
+<tr class="even">
+<td>Memory size</td>
+<td>256 Kbit / 32 KB</td>
+</tr>
+<tr class="odd">
+<td>Power supply</td>
+<td>CR2032 battery</td>
+</tr>
+<tr class="even">
+<td>Voltage rail</td>
+<td>3.3 V</td>
+</tr>
+<tr class="odd">
+<td>PCB size</td>
+<td>50 × 50 mm</td>
+</tr>
+<tr class="even">
+<td>Data interface</td>
+<td>USB-C</td>
+</tr>
+<tr class="odd">
+<td>Sensor interface</td>
+<td>SPI</td>
+</tr>
+<tr class="even">
+<td>Sampling frequency</td>
+<td>8 Hz</td>
+</tr>
+<tr class="odd">
+<td>Estimated recording time</td>
+<td>about 22 minutes</td>
+</tr>
+</tbody>
+</table>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
