@@ -8,10 +8,6 @@ Air Analyzer is an embedded system designed to monitor breathing-related activit
 
 The project focuses on sensor acquisition, firmware development, interrupt-based logic, and documentation of the embedded workflow.
 
-![](images/air_analyzer_overview.png)
-
-Image placeholder: replace this image with a real picture, block diagram, or system overview.
-
 ---
 
 ## Project Sections
@@ -41,3 +37,9 @@ Explanation of the embedded firmware, main source files, interrupt-based approac
 :::
 
 ::: {.card}
+### Usage
+
+Instructions for cloning, building, flashing, and using the project.
+
+[Open →](usage.qmd)
+:::

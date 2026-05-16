@@ -1,6 +1,12 @@
 project:
   type: website
   output-dir: docs
+  render:
+    - index.qmd
+    - overview.qmd
+    - hardware.qmd
+    - firmware.qmd
+    - usage.qmd
 
 website:
   title: "Air Analyzer"
@@ -17,29 +23,21 @@ website:
         contents:
           - href: overview.qmd
             text: "Overview"
-          - href: system_architecture.qmd
-            text: "System Architecture"
 
       - section: "Hardware"
         contents:
           - href: hardware.qmd
-            text: "Hardware Setup"
-          - href: sensors.qmd
-            text: "Sensors"
+            text: "Hardware"
 
       - section: "Firmware"
         contents:
           - href: firmware.qmd
-            text: "Firmware Overview"
-          - href: interrupts.qmd
-            text: "Interrupt-Based Logic"
+            text: "Firmware"
 
-      - section: "Results"
+      - section: "Usage"
         contents:
-          - href: results.qmd
-            text: "Tests and Results"
-          - href: future_works.qmd
-            text: "Conclusions and Future Works"
+          - href: usage.qmd
+            text: "Usage"
 
 format:
   html:
