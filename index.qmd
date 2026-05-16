@@ -2,30 +2,42 @@
 title: "Air Analyzer"
 ---
 
-# Air Analyzer
+## Wearable Smart Mask for Breathing Activity Monitoring
 
-Air Analyzer is a wearable smart mask for athletes designed to measure and log breathing frequency during physical activity.
+Air Analyzer is an embedded system designed to monitor breathing-related activity using a microcontroller-based architecture.
 
-## Project overview
+The project focuses on sensor acquisition, firmware development, interrupt-based logic, and documentation of the embedded workflow.
 
-The system is based on an embedded low-power architecture and is intended to acquire respiratory-related signals, process them on the microcontroller, and store or transmit useful information for later analysis.
+![](images/air_analyzer_overview.png)
 
-## Repository structure
+Image placeholder: replace this image with a real picture, block diagram, or system overview.
 
-```text
-air_analyzer/
-├── embedded/
-├── micro_usb/
-├── README.md
-└── documentation files
-## Main goals
+---
 
-The main goal of this project is to develop an embedded system for monitoring breathing activity using a microcontroller-based architecture.
+## Project Sections
 
-More specifically, the project aims to:
+::: {.card}
+### Project Overview
 
-- acquire data from the selected sensor;
-- process the acquired signal on the microcontroller;
-- detect useful information related to breathing activity;
-- manage the firmware using an interrupt-based approach;
-- provide a clear and reproducible structure for the firmware and documentation.
+General description of the Air Analyzer project, including motivation, objectives, and repository structure.
+
+[Open →](overview.qmd)
+:::
+
+::: {.card}
+### Hardware
+
+Description of the hardware architecture, sensor connections, microcontroller board, and physical setup.
+
+[Open →](hardware.qmd)
+:::
+
+::: {.card}
+### Firmware
+
+Explanation of the embedded firmware, main source files, interrupt-based approach, and communication logic.
+
+[Open →](firmware.qmd)
+:::
+
+::: {.card}

@@ -4,21 +4,50 @@ project:
 
 website:
   title: "Air Analyzer"
-  navbar:
-    left:
-      - href: index.qmd
-        text: Home
-      - href: hardware.qmd
-        text: Hardware
-      - href: firmware.qmd
-        text: Firmware
-      - href: usage.qmd
-        text: Usage
-      - href: results.qmd
-        text: Results
+  page-navigation: true
+
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
+      - text: "Home"
+        href: index.qmd
+
+      - section: "Project Overview"
+        contents:
+          - href: overview.qmd
+            text: "Overview"
+          - href: system_architecture.qmd
+            text: "System Architecture"
+
+      - section: "Hardware"
+        contents:
+          - href: hardware.qmd
+            text: "Hardware Setup"
+          - href: sensors.qmd
+            text: "Sensors"
+
+      - section: "Firmware"
+        contents:
+          - href: firmware.qmd
+            text: "Firmware Overview"
+          - href: interrupts.qmd
+            text: "Interrupt-Based Logic"
+
+      - section: "Results"
+        contents:
+          - href: results.qmd
+            text: "Tests and Results"
+          - href: future_works.qmd
+            text: "Conclusions and Future Works"
 
 format:
   html:
-    theme: cosmo
+    theme:
+      - cosmo
+      - styles.scss
     toc: true
+    toc-depth: 3
+    number-sections: false
     code-fold: true
+    code-copy: true

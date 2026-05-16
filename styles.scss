@@ -1,0 +1,38 @@
+/*-- scss:defaults --*/
+
+$body-bg: #ffffff;
+$body-color: #222222;
+$link-color: #2b6cb0;
+$sidebar-bg: #f7f8fa;
+
+/*-- scss:rules --*/
+
+h1, h2, h3 {
+  font-weight: 700;
+}
+
+.sidebar-title {
+  font-weight: 700;
+}
+
+.quarto-title-banner {
+  background: #f7f8fa;
+}
+
+.card {
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.card h3 {
+  margin-top: 0;
+}
+
+.card a {
+  font-weight: 600;
+  text-decoration: none;
+}

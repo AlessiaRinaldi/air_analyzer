@@ -1,0 +1,17 @@
+---
+title: "Overview"
+---
+
+# Overview
+
+Air Analyzer is a wearable embedded system for monitoring breathing-related activity.
+
+The project is based on a microcontroller architecture and focuses on real-time acquisition, signal handling, and firmware organization.
+
+## Objectives
+
+- Acquire data from the selected sensor.
+- Process the acquired signal on the microcontroller.
+- Detect useful information related to breathing activity.
+- Manage the firmware using an interrupt-based approach.
+- Provide clear and reproducible documentation.
