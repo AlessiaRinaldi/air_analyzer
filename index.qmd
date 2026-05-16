@@ -1,0 +1,31 @@
+---
+title: "Air Analyzer"
+---
+
+# Air Analyzer
+
+Air Analyzer is a wearable smart mask for athletes designed to measure and log breathing frequency during physical activity.
+
+## Project overview
+
+The system is based on an embedded low-power architecture and is intended to acquire respiratory-related signals, process them on the microcontroller, and store or transmit useful information for later analysis.
+
+## Repository structure
+
+```text
+air_analyzer/
+├── embedded/
+├── micro_usb/
+├── README.md
+└── documentation files
+## Main goals
+
+The main goal of this project is to develop an embedded system for monitoring breathing activity using a microcontroller-based architecture.
+
+More specifically, the project aims to:
+
+- acquire data from the selected sensor;
+- process the acquired signal on the microcontroller;
+- detect useful information related to breathing activity;
+- manage the firmware using an interrupt-based approach;
+- provide a clear and reproducible structure for the firmware and documentation.

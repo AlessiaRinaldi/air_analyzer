@@ -1,0 +1,24 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Air Analyzer"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: hardware.qmd
+        text: Hardware
+      - href: firmware.qmd
+        text: Firmware
+      - href: usage.qmd
+        text: Usage
+      - href: results.qmd
+        text: Results
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-fold: true

@@ -1,0 +1,21 @@
+---
+title: "Hardware"
+---
+
+# Hardware architecture
+
+This section describes the hardware architecture of the Air Analyzer system.
+
+## Main components
+
+- Microcontroller board
+- Breathing-related sensor interface
+- Power supply system
+- USB or serial communication interface
+
+## Hardware block diagram
+
+Add here a block diagram of the system.
+
+```text
+Sensor → Microcontroller → USB/Serial → PC

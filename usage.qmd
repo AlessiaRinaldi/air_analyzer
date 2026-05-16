@@ -1,0 +1,26 @@
+---
+title: "Usage"
+---
+
+# Usage
+
+This section explains how to use the Air Analyzer project.
+
+## Clone the repository
+
+```bash
+git clone https://github.com/AlessiaRinaldi/air_analyzer.git
+cd air_analyzer
+```
+
+## Firmware setup
+
+Open the firmware project inside the development environment and build it.
+
+## Flashing
+
+Describe here how to flash the microcontroller.
+
+## Data acquisition
+
+Describe here how the user should connect the device and acquire data.

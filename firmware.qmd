@@ -1,0 +1,40 @@
+---
+title: "Firmware"
+---
+
+# Firmware
+
+This section describes the embedded firmware of the Air Analyzer project.
+
+## Firmware structure
+
+The firmware is located mainly inside:
+
+```text
+micro_usb/
+```
+
+## Main firmware tasks
+
+- Initialize peripherals
+- Acquire sensor data
+- Handle USB or serial communication
+- Process breathing-related signals
+- Manage interrupts or timers
+
+## Main file
+
+The main application logic is located in:
+
+```text
+micro_usb/Core/Src/main.c
+```
+
+## Build environment
+
+Add here information about:
+
+- STM32CubeIDE or VS Code setup
+- Required extensions
+- Compiler/toolchain
+- Flashing procedure
