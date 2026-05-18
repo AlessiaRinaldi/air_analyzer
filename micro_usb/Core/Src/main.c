@@ -42,7 +42,7 @@
 #define MEM_CS_PORT    GPIOB
 #define MEM_CS_PIN     GPIO_PIN_12
 
-#define DATA_SIZE      2 /* Dimensione in byte dei dati del sensore */
+#define DATA_SIZE      4 /* Dimensione in byte dei dati del sensore */
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -55,8 +55,14 @@
 /* USER CODE BEGIN PV */
 extern SPI_HandleTypeDef hspi1; 
 
-uint8_t sensor_tx_buf[DATA_SIZE] = {0x00, 0x00}; /* Buffer di trasmissione dummy per far generare il clock al DMA */
-uint8_t sensor_rx_buf[DATA_SIZE] = {0};          /* Buffer in cui il DMA salva i dati letti dal sensore */
+uint8_t sensor_tx_buf[DATA_SIZE] = {
+    0x80 | 0x28,   // comando SPI read da PRESS_OUT_XL
+    0x00,
+    0x00,
+    0x00
+};
+
+uint8_t sensor_rx_buf[DATA_SIZE] = {0};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -104,18 +110,25 @@ int main(void)
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
 
-  /* 1. Assert del chip select del sensore di pressione (Attivo Basso) */
-  HAL_GPIO_WritePin(SENSOR_CS_PORT, SENSOR_CS_PIN, GPIO_PIN_RESET);
+/* Prima tengo entrambi i chip select alti */
+HAL_GPIO_WritePin(SENSOR_CS_PORT, SENSOR_CS_PIN, GPIO_PIN_SET);
+HAL_GPIO_WritePin(MEM_CS_PORT, MEM_CS_PIN, GPIO_PIN_SET);
 
-  /* 2. Configurazione del sensore */
-  /* (Esempio: invio un comando di setup iniziale, adatta i byte al datasheet del tuo sensore) */
-  uint8_t config_cmd[2] = {0x20, 0x80}; 
-  HAL_SPI_Transmit(&hspi1, config_cmd, 2, HAL_MAX_DELAY);
+/* Configurazione LPS22HB:
+   CTRL_REG1 = 0x10
+   0x22 = ODR 10 Hz + BDU = 1 + SPI 4 fili
+*/
+uint8_t config_cmd[2] = {0x10, 0x22}; //per andare a 10 Hz
 
-  /* 3. Inizio trasferimento SPI con DMA per la prima acquisizione */
-  HAL_SPI_TransmitReceive_DMA(&hspi1, sensor_tx_buf, sensor_rx_buf, DATA_SIZE);
+HAL_GPIO_WritePin(SENSOR_CS_PORT, SENSOR_CS_PIN, GPIO_PIN_RESET);
+HAL_SPI_Transmit(&hspi1, config_cmd, 2, HAL_MAX_DELAY);
+HAL_GPIO_WritePin(SENSOR_CS_PORT, SENSOR_CS_PIN, GPIO_PIN_SET);
 
-  /* USER CODE END 2 */
+/* Prima lettura pressione */
+HAL_GPIO_WritePin(SENSOR_CS_PORT, SENSOR_CS_PIN, GPIO_PIN_RESET);
+HAL_SPI_TransmitReceive_DMA(&hspi1, sensor_tx_buf, sensor_rx_buf, DATA_SIZE);
+
+/* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -201,12 +214,14 @@ void HAL_SPI_TxRxCpltCallback(SPI_HandleTypeDef *hspi)
 
     /* 3. Scrivo i dati in memoria */
     /* (Formattazione del comando di scrittura per la memoria SPI) */
-    uint8_t mem_write_cmd[3];
-    mem_write_cmd[0] = 0x02; /* Codice operativo di Write fittizio */
-    mem_write_cmd[1] = sensor_rx_buf[0];
-    mem_write_cmd[2] = sensor_rx_buf[1];
+    uint8_t mem_write_cmd[4];
+
+    mem_write_cmd[0] = 0x02;             /* comando WRITE memoria, da adattare al datasheet memoria */
+    mem_write_cmd[1] = sensor_rx_buf[1]; /* PRESS_OUT_XL */
+    mem_write_cmd[2] = sensor_rx_buf[2]; /* PRESS_OUT_L  */
+    mem_write_cmd[3] = sensor_rx_buf[3]; /* PRESS_OUT_H  */
     
-    HAL_SPI_Transmit(hspi, mem_write_cmd, 3, 10); 
+    HAL_SPI_Transmit(hspi, mem_write_cmd, 4, 10); 
 
     /* 4. Deassert del chip select della memoria */
     HAL_GPIO_WritePin(MEM_CS_PORT, MEM_CS_PIN, GPIO_PIN_SET);
