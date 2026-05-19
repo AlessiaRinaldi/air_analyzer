@@ -1,2 +1,5 @@
-# air_analyzer
-Wearable Smart Mask for Athletes: a low-power embedded system designed to measure and log breathing frequency during physical activity
+## Documentation
+
+The full project documentation is available at:
+
+[Air Analyzer Documentation](https://alessiarinaldi.github.io/air_analyzer/)
