@@ -4,51 +4,106 @@
     "href": "usage.html",
     "title": "Usage",
     "section": "",
-    "text": "This section explains how to use the Air Analyzer project.\n\n\ngit clone https://github.com/AlessiaRinaldi/air_analyzer.git\ncd air_analyzer\n\n\n\nOpen the firmware project inside the development environment and build it.\n\n\n\nDescribe here how to flash the microcontroller.\n\n\n\nDescribe here how the user should connect the device and acquire data.",
+    "text": "This section describes how to set up, build, flash, and use the Air Analyzer prototype.\nThe project is organized around a custom STM32-based embedded board designed to acquire pressure variations inside a wearable mask, store the raw data locally, and allow post-session analysis.\n\n\n\nClone the project repository:\ngit clone https://github.com/AlessiaRinaldi/air_analyzer.git\ncd air_analyzer\nThe repository contains the firmware source code, hardware design files, and project documentation.\n\n\n\n\nThe firmware is located in the micro_usb directory:\nmicro_usb/\nThe main application logic is implemented in:\nmicro_usb/Core/Src/main.c\nThe project was generated using STM32CubeMX. Peripheral initialization code is generated automatically, while the application-specific code is placed inside the dedicated USER CODE BEGIN and USER CODE END sections.\n\n\n\n\nThe firmware can be opened and built using an STM32 development environment such as:\n\nSTM32CubeIDE;\nVisual Studio Code with STM32 support;\nARM GCC toolchain and make-based workflow.\n\nDuring development, the board can be programmed and debugged through the STDC14 connector using an ST-Link interface.\n\n\n\n\nTo run the firmware on the board:\n\nOpen the firmware project inside the chosen development environment.\nBuild the project.\nConnect the board to the programmer through the STDC14 debug connector.\nFlash the firmware to the STM32L052 microcontroller.\nReset the board and start the acquisition.\n\nDuring firmware development, the debug connector can also be used to power the board without relying on the CR2032 battery.\n\n\n\n\nOnce the firmware is running, the device follows this acquisition sequence:\n\nthe STM32 initializes the configured peripherals;\nthe LPS22HBTR pressure sensor is configured for continuous acquisition at 10 Hz;\npressure data are acquired through SPI using DMA;\neach pressure sample is stored in raw 24-bit format;\nthe external EEPROM stores the acquired data locally;\nthe data can be retrieved after the recording session for offline analysis.\n\nThe device stores only pressure data. Temperature data are not acquired or saved in the current firmware implementation.\n\n\n\n\nEach pressure sample occupies 3 bytes, corresponding to the native 24-bit pressure output of the LPS22HBTR sensor.\nThe stored byte order is:\nPRESS_OUT_XL\nPRESS_OUT_L\nPRESS_OUT_H\nAt a sampling rate of 10 Hz, the memory usage is:\n3 bytes/sample × 10 samples/s = 30 bytes/s\nWith a 32 KB EEPROM, the approximate maximum recording time is:\n32768 bytes / 30 bytes/s ≈ 1092 s ≈ 18 min\nIf a 64 KB memory is used, the expected recording time becomes approximately 36 minutes.\n\n\n\n\nThe raw pressure samples can be converted offline after data retrieval.\nThe 24-bit pressure value must be reconstructed from the three stored bytes and interpreted as a signed two’s complement value. The pressure in hPa can then be obtained as:\npressure_hPa = pressure_raw / 4096\nOffline processing can be used to:\n\nreconstruct the pressure waveform;\nfilter noise and motion artifacts;\nidentify inhalation and exhalation phases;\nestimate breathing frequency;\ncompare respiratory patterns between different users or exercise conditions.\n\n\n\n\n\nThe current prototype focuses on validating the embedded acquisition and storage pipeline. Some aspects are still under development:\n\nautomatic data download from EEPROM through USB-C;\ncomplete post-processing software for respiratory-rate extraction;\nexperimental validation during real physical activity;\nlong-term power consumption measurements;\nmechanical optimization of the mask and PCB mounting.\n\n\n\n\n\nFuture improvements will focus on both firmware and system-level validation.\nPossible developments include:\n\nimplementing a complete USB-based data download tool;\nadding a structured memory management system for multiple recording sessions;\nimproving the low-power strategy by using deeper sleep modes;\nvalidating the signal quality during different sports activities;\ncomparing measurements between trained and untrained users;\ndesigning a more compact PCB revision;\nimproving the mechanical integration of the electronics into the mask.\n\nThese improvements would make the system more robust, easier to use, and more suitable for experimental respiratory monitoring during real exercise sessions.",
     "crumbs": [
       "Usage",
       "Usage"
     ]
   },
   {
-    "objectID": "usage.html#clone-the-repository",
-    "href": "usage.html#clone-the-repository",
+    "objectID": "usage.html#repository",
+    "href": "usage.html#repository",
     "title": "Usage",
     "section": "",
-    "text": "git clone https://github.com/AlessiaRinaldi/air_analyzer.git\ncd air_analyzer",
+    "text": "Clone the project repository:\ngit clone https://github.com/AlessiaRinaldi/air_analyzer.git\ncd air_analyzer\nThe repository contains the firmware source code, hardware design files, and project documentation.",
     "crumbs": [
       "Usage",
       "Usage"
     ]
   },
   {
-    "objectID": "usage.html#firmware-setup",
-    "href": "usage.html#firmware-setup",
+    "objectID": "usage.html#firmware-project",
+    "href": "usage.html#firmware-project",
     "title": "Usage",
     "section": "",
-    "text": "Open the firmware project inside the development environment and build it.",
+    "text": "The firmware is located in the micro_usb directory:\nmicro_usb/\nThe main application logic is implemented in:\nmicro_usb/Core/Src/main.c\nThe project was generated using STM32CubeMX. Peripheral initialization code is generated automatically, while the application-specific code is placed inside the dedicated USER CODE BEGIN and USER CODE END sections.",
     "crumbs": [
       "Usage",
       "Usage"
     ]
   },
   {
-    "objectID": "usage.html#flashing",
-    "href": "usage.html#flashing",
+    "objectID": "usage.html#development-environment",
+    "href": "usage.html#development-environment",
     "title": "Usage",
     "section": "",
-    "text": "Describe here how to flash the microcontroller.",
+    "text": "The firmware can be opened and built using an STM32 development environment such as:\n\nSTM32CubeIDE;\nVisual Studio Code with STM32 support;\nARM GCC toolchain and make-based workflow.\n\nDuring development, the board can be programmed and debugged through the STDC14 connector using an ST-Link interface.",
     "crumbs": [
       "Usage",
       "Usage"
     ]
   },
   {
-    "objectID": "usage.html#data-acquisition",
-    "href": "usage.html#data-acquisition",
+    "objectID": "usage.html#build-and-flash",
+    "href": "usage.html#build-and-flash",
     "title": "Usage",
     "section": "",
-    "text": "Describe here how the user should connect the device and acquire data.",
+    "text": "To run the firmware on the board:\n\nOpen the firmware project inside the chosen development environment.\nBuild the project.\nConnect the board to the programmer through the STDC14 debug connector.\nFlash the firmware to the STM32L052 microcontroller.\nReset the board and start the acquisition.\n\nDuring firmware development, the debug connector can also be used to power the board without relying on the CR2032 battery.",
+    "crumbs": [
+      "Usage",
+      "Usage"
+    ]
+  },
+  {
+    "objectID": "usage.html#acquisition-workflow",
+    "href": "usage.html#acquisition-workflow",
+    "title": "Usage",
+    "section": "",
+    "text": "Once the firmware is running, the device follows this acquisition sequence:\n\nthe STM32 initializes the configured peripherals;\nthe LPS22HBTR pressure sensor is configured for continuous acquisition at 10 Hz;\npressure data are acquired through SPI using DMA;\neach pressure sample is stored in raw 24-bit format;\nthe external EEPROM stores the acquired data locally;\nthe data can be retrieved after the recording session for offline analysis.\n\nThe device stores only pressure data. Temperature data are not acquired or saved in the current firmware implementation.",
+    "crumbs": [
+      "Usage",
+      "Usage"
+    ]
+  },
+  {
+    "objectID": "usage.html#stored-data-format",
+    "href": "usage.html#stored-data-format",
+    "title": "Usage",
+    "section": "",
+    "text": "Each pressure sample occupies 3 bytes, corresponding to the native 24-bit pressure output of the LPS22HBTR sensor.\nThe stored byte order is:\nPRESS_OUT_XL\nPRESS_OUT_L\nPRESS_OUT_H\nAt a sampling rate of 10 Hz, the memory usage is:\n3 bytes/sample × 10 samples/s = 30 bytes/s\nWith a 32 KB EEPROM, the approximate maximum recording time is:\n32768 bytes / 30 bytes/s ≈ 1092 s ≈ 18 min\nIf a 64 KB memory is used, the expected recording time becomes approximately 36 minutes.",
+    "crumbs": [
+      "Usage",
+      "Usage"
+    ]
+  },
+  {
+    "objectID": "usage.html#post-processing",
+    "href": "usage.html#post-processing",
+    "title": "Usage",
+    "section": "",
+    "text": "The raw pressure samples can be converted offline after data retrieval.\nThe 24-bit pressure value must be reconstructed from the three stored bytes and interpreted as a signed two’s complement value. The pressure in hPa can then be obtained as:\npressure_hPa = pressure_raw / 4096\nOffline processing can be used to:\n\nreconstruct the pressure waveform;\nfilter noise and motion artifacts;\nidentify inhalation and exhalation phases;\nestimate breathing frequency;\ncompare respiratory patterns between different users or exercise conditions.",
+    "crumbs": [
+      "Usage",
+      "Usage"
+    ]
+  },
+  {
+    "objectID": "usage.html#current-limitations",
+    "href": "usage.html#current-limitations",
+    "title": "Usage",
+    "section": "",
+    "text": "The current prototype focuses on validating the embedded acquisition and storage pipeline. Some aspects are still under development:\n\nautomatic data download from EEPROM through USB-C;\ncomplete post-processing software for respiratory-rate extraction;\nexperimental validation during real physical activity;\nlong-term power consumption measurements;\nmechanical optimization of the mask and PCB mounting.",
+    "crumbs": [
+      "Usage",
+      "Usage"
+    ]
+  },
+  {
+    "objectID": "usage.html#future-work",
+    "href": "usage.html#future-work",
+    "title": "Usage",
+    "section": "",
+    "text": "Future improvements will focus on both firmware and system-level validation.\nPossible developments include:\n\nimplementing a complete USB-based data download tool;\nadding a structured memory management system for multiple recording sessions;\nimproving the low-power strategy by using deeper sleep modes;\nvalidating the signal quality during different sports activities;\ncomparing measurements between trained and untrained users;\ndesigning a more compact PCB revision;\nimproving the mechanical integration of the electronics into the mask.\n\nThese improvements would make the system more robust, easier to use, and more suitable for experimental respiratory monitoring during real exercise sessions.",
     "crumbs": [
       "Usage",
       "Usage"
