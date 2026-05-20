@@ -227,10 +227,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#usage" id="toc-usage" class="nav-link active" data-scroll-target="#usage">Usage</a>
   <ul class="collapse">
-  <li><a href="#clone-the-repository" id="toc-clone-the-repository" class="nav-link" data-scroll-target="#clone-the-repository">Clone the repository</a></li>
-  <li><a href="#firmware-setup" id="toc-firmware-setup" class="nav-link" data-scroll-target="#firmware-setup">Firmware setup</a></li>
-  <li><a href="#flashing" id="toc-flashing" class="nav-link" data-scroll-target="#flashing">Flashing</a></li>
-  <li><a href="#data-acquisition" id="toc-data-acquisition" class="nav-link" data-scroll-target="#data-acquisition">Data acquisition</a></li>
+  <li><a href="#repository" id="toc-repository" class="nav-link" data-scroll-target="#repository">Repository</a></li>
+  <li><a href="#firmware-project" id="toc-firmware-project" class="nav-link" data-scroll-target="#firmware-project">Firmware Project</a></li>
+  <li><a href="#development-environment" id="toc-development-environment" class="nav-link" data-scroll-target="#development-environment">Development Environment</a></li>
+  <li><a href="#build-and-flash" id="toc-build-and-flash" class="nav-link" data-scroll-target="#build-and-flash">Build and Flash</a></li>
+  <li><a href="#acquisition-workflow" id="toc-acquisition-workflow" class="nav-link" data-scroll-target="#acquisition-workflow">Acquisition Workflow</a></li>
+  <li><a href="#stored-data-format" id="toc-stored-data-format" class="nav-link" data-scroll-target="#stored-data-format">Stored Data Format</a></li>
+  <li><a href="#post-processing" id="toc-post-processing" class="nav-link" data-scroll-target="#post-processing">Post-Processing</a></li>
+  <li><a href="#current-limitations" id="toc-current-limitations" class="nav-link" data-scroll-target="#current-limitations">Current Limitations</a></li>
+  <li><a href="#future-work" id="toc-future-work" class="nav-link" data-scroll-target="#future-work">Future Work</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -259,23 +264,119 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="usage" class="level1">
 <h1>Usage</h1>
-<p>This section explains how to use the Air Analyzer project.</p>
-<section id="clone-the-repository" class="level2">
-<h2 class="anchored" data-anchor-id="clone-the-repository">Clone the repository</h2>
+<p>This section describes how to set up, build, flash, and use the Air Analyzer prototype.</p>
+<p>The project is organized around a custom STM32-based embedded board designed to acquire pressure variations inside a wearable mask, store the raw data locally, and allow post-session analysis.</p>
+<hr>
+<section id="repository" class="level2">
+<h2 class="anchored" data-anchor-id="repository">Repository</h2>
+<p>Clone the project repository:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/AlessiaRinaldi/air_analyzer.git</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> air_analyzer</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The repository contains the firmware source code, hardware design files, and project documentation.</p>
+<hr>
 </section>
-<section id="firmware-setup" class="level2">
-<h2 class="anchored" data-anchor-id="firmware-setup">Firmware setup</h2>
-<p>Open the firmware project inside the development environment and build it.</p>
+<section id="firmware-project" class="level2">
+<h2 class="anchored" data-anchor-id="firmware-project">Firmware Project</h2>
+<p>The firmware is located in the <code>micro_usb</code> directory:</p>
+<pre class="text"><code>micro_usb/</code></pre>
+<p>The main application logic is implemented in:</p>
+<pre class="text"><code>micro_usb/Core/Src/main.c</code></pre>
+<p>The project was generated using STM32CubeMX. Peripheral initialization code is generated automatically, while the application-specific code is placed inside the dedicated <code>USER CODE BEGIN</code> and <code>USER CODE END</code> sections.</p>
+<hr>
 </section>
-<section id="flashing" class="level2">
-<h2 class="anchored" data-anchor-id="flashing">Flashing</h2>
-<p>Describe here how to flash the microcontroller.</p>
+<section id="development-environment" class="level2">
+<h2 class="anchored" data-anchor-id="development-environment">Development Environment</h2>
+<p>The firmware can be opened and built using an STM32 development environment such as:</p>
+<ul>
+<li>STM32CubeIDE;</li>
+<li>Visual Studio Code with STM32 support;</li>
+<li>ARM GCC toolchain and make-based workflow.</li>
+</ul>
+<p>During development, the board can be programmed and debugged through the STDC14 connector using an ST-Link interface.</p>
+<hr>
 </section>
-<section id="data-acquisition" class="level2">
-<h2 class="anchored" data-anchor-id="data-acquisition">Data acquisition</h2>
-<p>Describe here how the user should connect the device and acquire data.</p>
+<section id="build-and-flash" class="level2">
+<h2 class="anchored" data-anchor-id="build-and-flash">Build and Flash</h2>
+<p>To run the firmware on the board:</p>
+<ol type="1">
+<li>Open the firmware project inside the chosen development environment.</li>
+<li>Build the project.</li>
+<li>Connect the board to the programmer through the STDC14 debug connector.</li>
+<li>Flash the firmware to the STM32L052 microcontroller.</li>
+<li>Reset the board and start the acquisition.</li>
+</ol>
+<p>During firmware development, the debug connector can also be used to power the board without relying on the CR2032 battery.</p>
+<hr>
+</section>
+<section id="acquisition-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="acquisition-workflow">Acquisition Workflow</h2>
+<p>Once the firmware is running, the device follows this acquisition sequence:</p>
+<ol type="1">
+<li>the STM32 initializes the configured peripherals;</li>
+<li>the LPS22HBTR pressure sensor is configured for continuous acquisition at 10 Hz;</li>
+<li>pressure data are acquired through SPI using DMA;</li>
+<li>each pressure sample is stored in raw 24-bit format;</li>
+<li>the external EEPROM stores the acquired data locally;</li>
+<li>the data can be retrieved after the recording session for offline analysis.</li>
+</ol>
+<p>The device stores only pressure data. Temperature data are not acquired or saved in the current firmware implementation.</p>
+<hr>
+</section>
+<section id="stored-data-format" class="level2">
+<h2 class="anchored" data-anchor-id="stored-data-format">Stored Data Format</h2>
+<p>Each pressure sample occupies 3 bytes, corresponding to the native 24-bit pressure output of the LPS22HBTR sensor.</p>
+<p>The stored byte order is:</p>
+<pre class="text"><code>PRESS_OUT_XL
+PRESS_OUT_L
+PRESS_OUT_H</code></pre>
+<p>At a sampling rate of 10 Hz, the memory usage is:</p>
+<pre class="text"><code>3 bytes/sample × 10 samples/s = 30 bytes/s</code></pre>
+<p>With a 32 KB EEPROM, the approximate maximum recording time is:</p>
+<pre class="text"><code>32768 bytes / 30 bytes/s ≈ 1092 s ≈ 18 min</code></pre>
+<p>If a 64 KB memory is used, the expected recording time becomes approximately 36 minutes.</p>
+<hr>
+</section>
+<section id="post-processing" class="level2">
+<h2 class="anchored" data-anchor-id="post-processing">Post-Processing</h2>
+<p>The raw pressure samples can be converted offline after data retrieval.</p>
+<p>The 24-bit pressure value must be reconstructed from the three stored bytes and interpreted as a signed two’s complement value. The pressure in hPa can then be obtained as:</p>
+<pre class="text"><code>pressure_hPa = pressure_raw / 4096</code></pre>
+<p>Offline processing can be used to:</p>
+<ul>
+<li>reconstruct the pressure waveform;</li>
+<li>filter noise and motion artifacts;</li>
+<li>identify inhalation and exhalation phases;</li>
+<li>estimate breathing frequency;</li>
+<li>compare respiratory patterns between different users or exercise conditions.</li>
+</ul>
+<hr>
+</section>
+<section id="current-limitations" class="level2">
+<h2 class="anchored" data-anchor-id="current-limitations">Current Limitations</h2>
+<p>The current prototype focuses on validating the embedded acquisition and storage pipeline. Some aspects are still under development:</p>
+<ul>
+<li>automatic data download from EEPROM through USB-C;</li>
+<li>complete post-processing software for respiratory-rate extraction;</li>
+<li>experimental validation during real physical activity;</li>
+<li>long-term power consumption measurements;</li>
+<li>mechanical optimization of the mask and PCB mounting.</li>
+</ul>
+<hr>
+</section>
+<section id="future-work" class="level2">
+<h2 class="anchored" data-anchor-id="future-work">Future Work</h2>
+<p>Future improvements will focus on both firmware and system-level validation.</p>
+<p>Possible developments include:</p>
+<ul>
+<li>implementing a complete USB-based data download tool;</li>
+<li>adding a structured memory management system for multiple recording sessions;</li>
+<li>improving the low-power strategy by using deeper sleep modes;</li>
+<li>validating the signal quality during different sports activities;</li>
+<li>comparing measurements between trained and untrained users;</li>
+<li>designing a more compact PCB revision;</li>
+<li>improving the mechanical integration of the electronics into the mask.</li>
+</ul>
+<p>These improvements would make the system more robust, easier to use, and more suitable for experimental respiratory monitoring during real exercise sessions.</p>
 
 
 </section>
