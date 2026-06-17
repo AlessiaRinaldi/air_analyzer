@@ -25,16 +25,16 @@ The repository contains the firmware source code, hardware design files, and pro
 
 ## Firmware Project
 
-The firmware is located in the `micro_usb` directory:
+The firmware is located in the `firmware` directory:
 
 ```text
-micro_usb/
+firmware/
 ```
 
 The main application logic is implemented in:
 
 ```text
-micro_usb/Core/Src/main.c
+firmware/Core/Src/main.c
 ```
 
 The project was generated using STM32CubeMX. Peripheral initialization code is generated automatically, while the application-specific code is placed inside the dedicated `USER CODE BEGIN` and `USER CODE END` sections.

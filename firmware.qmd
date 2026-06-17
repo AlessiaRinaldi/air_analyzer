@@ -216,7 +216,7 @@ Together, these choices allow the firmware to acquire respiratory pressure data 
 |---|---|
 | Microcontroller | STM32L052K8Tx |
 | Firmware generation tool | STM32CubeMX |
-| Main firmware file | `micro_usb/Core/Src/main.c` |
+| Main firmware file | `firmware/Core/Src/main.c` |
 | Sensor | LPS22HBTR |
 | Acquired quantity | Pressure only |
 | Sensor interface | SPI |

@@ -116,5 +116,3 @@ air_analyzer/
 ├── files: .qmd
 └── README.md
 ```
-
-The firmware implementation is mainly located inside the `micro_usb/` directory, while the Quarto documentation is generated inside the `docs/` folder.
