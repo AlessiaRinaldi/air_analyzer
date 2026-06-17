@@ -107,14 +107,13 @@ The repository is organized as follows:
 
 ```text
 air_analyzer/
-├── embedded/
-├── micro_usb/
-├── docs/
-├── index.qmd
-├── overview.qmd
-├── hardware.qmd
-├── firmware.qmd
-├── usage.qmd
+├── datasheets/
+├── firmware/
+├── Hardware/
+├── images/
+├── paper_and_presentation/
+├── website_files/
+├── files: .qmd
 └── README.md
 ```
 

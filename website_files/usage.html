@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Overview – Air Analyzer</title>
+<title>Usage – Air Analyzer</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +65,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./hardware.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./firmware.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -83,7 +117,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./overview.html">Project Overview</a></li><li class="breadcrumb-item"><a href="./overview.html">Overview</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./usage.html">Usage</a></li><li class="breadcrumb-item"><a href="./usage.html">Usage</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -124,7 +158,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./overview.html" class="sidebar-item-text sidebar-link active">
+  <a href="./overview.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview</span></a>
   </div>
 </li>
@@ -175,7 +209,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./usage.html" class="sidebar-item-text sidebar-link">
+  <a href="./usage.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Usage</span></a>
   </div>
 </li>
@@ -191,20 +225,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#project-overview" id="toc-project-overview" class="nav-link active" data-scroll-target="#project-overview">Project Overview</a>
+  <li><a href="#usage" id="toc-usage" class="nav-link active" data-scroll-target="#usage">Usage</a>
   <ul class="collapse">
-  <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation">Motivation</a></li>
-  <li><a href="#main-idea" id="toc-main-idea" class="nav-link" data-scroll-target="#main-idea">Main Idea</a></li>
-  <li><a href="#system-concept" id="toc-system-concept" class="nav-link" data-scroll-target="#system-concept">System Concept</a></li>
-  <li><a href="#design-goals" id="toc-design-goals" class="nav-link" data-scroll-target="#design-goals">Design Goals</a></li>
-  <li><a href="#key-design-choices" id="toc-key-design-choices" class="nav-link" data-scroll-target="#key-design-choices">Key Design Choices</a>
-  <ul class="collapse">
-  <li><a href="#direct-pressure-sensing" id="toc-direct-pressure-sensing" class="nav-link" data-scroll-target="#direct-pressure-sensing">Direct Pressure Sensing</a></li>
-  <li><a href="#offline-data-storage" id="toc-offline-data-storage" class="nav-link" data-scroll-target="#offline-data-storage">Offline Data Storage</a></li>
-  <li><a href="#low-power-interrupt-driven-firmware" id="toc-low-power-interrupt-driven-firmware" class="nav-link" data-scroll-target="#low-power-interrupt-driven-firmware">Low-Power Interrupt-Driven Firmware</a></li>
-  </ul></li>
-  <li><a href="#main-components" id="toc-main-components" class="nav-link" data-scroll-target="#main-components">Main Components</a></li>
-  <li><a href="#repository-structure" id="toc-repository-structure" class="nav-link" data-scroll-target="#repository-structure">Repository Structure</a></li>
+  <li><a href="#repository" id="toc-repository" class="nav-link" data-scroll-target="#repository">Repository</a></li>
+  <li><a href="#firmware-project" id="toc-firmware-project" class="nav-link" data-scroll-target="#firmware-project">Firmware Project</a></li>
+  <li><a href="#development-environment" id="toc-development-environment" class="nav-link" data-scroll-target="#development-environment">Development Environment</a></li>
+  <li><a href="#build-and-flash" id="toc-build-and-flash" class="nav-link" data-scroll-target="#build-and-flash">Build and Flash</a></li>
+  <li><a href="#acquisition-workflow" id="toc-acquisition-workflow" class="nav-link" data-scroll-target="#acquisition-workflow">Acquisition Workflow</a></li>
+  <li><a href="#stored-data-format" id="toc-stored-data-format" class="nav-link" data-scroll-target="#stored-data-format">Stored Data Format</a></li>
+  <li><a href="#post-processing" id="toc-post-processing" class="nav-link" data-scroll-target="#post-processing">Post-Processing</a></li>
+  <li><a href="#current-limitations" id="toc-current-limitations" class="nav-link" data-scroll-target="#current-limitations">Current Limitations</a></li>
+  <li><a href="#future-work" id="toc-future-work" class="nav-link" data-scroll-target="#future-work">Future Work</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -212,9 +243,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./overview.html">Project Overview</a></li><li class="breadcrumb-item"><a href="./overview.html">Overview</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./usage.html">Usage</a></li><li class="breadcrumb-item"><a href="./usage.html">Usage</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Overview</h1>
+<h1 class="title">Usage</h1>
 </div>
 
 
@@ -231,105 +262,121 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="project-overview" class="level1">
-<h1>Project Overview</h1>
-<p><strong>Air Analyzer</strong> is a low-power wearable system designed for respiratory activity monitoring during physical exercise. The device is integrated into a sports mask and uses an embedded microcontroller-based architecture to acquire pressure-related breathing signals, store data locally, and allow post-session data retrieval through USB.</p>
-<p>The main objective of the project is to provide a compact, non-invasive, and energy-efficient solution for monitoring breathing patterns in athletes and during physical activity.</p>
+<section id="usage" class="level1">
+<h1>Usage</h1>
+<p>This section describes how to set up, build, flash, and use the Air Analyzer prototype.</p>
+<p>The project is organized around a custom STM32-based embedded board designed to acquire pressure variations inside a wearable mask, store the raw data locally, and allow post-session analysis.</p>
 <hr>
-<section id="motivation" class="level2">
-<h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
-<p>Respiratory activity is an important physiological indicator during exercise. Breathing frequency and breathing patterns can provide useful information about physical effort, fatigue level, and cardiopulmonary response to training.</p>
-<p>Many existing respiratory monitoring systems are either too bulky for sport applications, uncomfortable during movement, expensive, or dependent on wireless communication. These limitations reduce their usability in real exercise conditions.</p>
-<p>Air Analyzer addresses these issues by combining:</p>
+<section id="repository" class="level2">
+<h2 class="anchored" data-anchor-id="repository">Repository</h2>
+<p>Clone the project repository:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/AlessiaRinaldi/air_analyzer.git</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> air_analyzer</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The repository contains the firmware source code, hardware design files, and project documentation.</p>
+<hr>
+</section>
+<section id="firmware-project" class="level2">
+<h2 class="anchored" data-anchor-id="firmware-project">Firmware Project</h2>
+<p>The firmware is located in the <code>micro_usb</code> directory:</p>
+<pre class="text"><code>micro_usb/</code></pre>
+<p>The main application logic is implemented in:</p>
+<pre class="text"><code>micro_usb/Core/Src/main.c</code></pre>
+<p>The project was generated using STM32CubeMX. Peripheral initialization code is generated automatically, while the application-specific code is placed inside the dedicated <code>USER CODE BEGIN</code> and <code>USER CODE END</code> sections.</p>
+<hr>
+</section>
+<section id="development-environment" class="level2">
+<h2 class="anchored" data-anchor-id="development-environment">Development Environment</h2>
+<p>The firmware can be opened and built using an STM32 development environment such as:</p>
 <ul>
-<li>direct pressure sensing inside a sports mask;</li>
-<li>local data storage;</li>
-<li>low-power firmware management;</li>
-<li>USB-based post-session data retrieval;</li>
-<li>a compact custom PCB suitable for wearable integration.</li>
+<li>STM32CubeIDE;</li>
+<li>Visual Studio Code with STM32 support;</li>
+<li>ARM GCC toolchain and make-based workflow.</li>
+</ul>
+<p>During development, the board can be programmed and debugged through the STDC14 connector using an ST-Link interface.</p>
+<hr>
+</section>
+<section id="build-and-flash" class="level2">
+<h2 class="anchored" data-anchor-id="build-and-flash">Build and Flash</h2>
+<p>To run the firmware on the board:</p>
+<ol type="1">
+<li>Open the firmware project inside the chosen development environment.</li>
+<li>Build the project.</li>
+<li>Connect the board to the programmer through the STDC14 debug connector.</li>
+<li>Flash the firmware to the STM32L052 microcontroller.</li>
+<li>Reset the board and start the acquisition.</li>
+</ol>
+<p>During firmware development, the debug connector can also be used to power the board without relying on the CR2032 battery.</p>
+<hr>
+</section>
+<section id="acquisition-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="acquisition-workflow">Acquisition Workflow</h2>
+<p>Once the firmware is running, the device follows this acquisition sequence:</p>
+<ol type="1">
+<li>the STM32 initializes the configured peripherals;</li>
+<li>the LPS22HBTR pressure sensor is configured for continuous acquisition at 10 Hz;</li>
+<li>pressure data are acquired through SPI using DMA;</li>
+<li>each pressure sample is stored in raw 24-bit format;</li>
+<li>the external EEPROM stores the acquired data locally;</li>
+<li>the data can be retrieved after the recording session for offline analysis.</li>
+</ol>
+<p>The device stores only pressure data. Temperature data are not acquired or saved in the current firmware implementation.</p>
+<hr>
+</section>
+<section id="stored-data-format" class="level2">
+<h2 class="anchored" data-anchor-id="stored-data-format">Stored Data Format</h2>
+<p>Each pressure sample occupies 3 bytes, corresponding to the native 24-bit pressure output of the LPS22HBTR sensor.</p>
+<p>The stored byte order is:</p>
+<pre class="text"><code>PRESS_OUT_XL
+PRESS_OUT_L
+PRESS_OUT_H</code></pre>
+<p>At a sampling rate of 10 Hz, the memory usage is:</p>
+<pre class="text"><code>3 bytes/sample × 10 samples/s = 30 bytes/s</code></pre>
+<p>With a 32 KB EEPROM, the approximate maximum recording time is:</p>
+<pre class="text"><code>32768 bytes / 30 bytes/s ≈ 1092 s ≈ 18 min</code></pre>
+<p>If a 64 KB memory is used, the expected recording time becomes approximately 36 minutes.</p>
+<hr>
+</section>
+<section id="post-processing" class="level2">
+<h2 class="anchored" data-anchor-id="post-processing">Post-Processing</h2>
+<p>The raw pressure samples can be converted offline after data retrieval.</p>
+<p>The 24-bit pressure value must be reconstructed from the three stored bytes and interpreted as a signed two’s complement value. The pressure in hPa can then be obtained as:</p>
+<pre class="text"><code>pressure_hPa = pressure_raw / 4096</code></pre>
+<p>Offline processing can be used to:</p>
+<ul>
+<li>reconstruct the pressure waveform;</li>
+<li>filter noise and motion artifacts;</li>
+<li>identify inhalation and exhalation phases;</li>
+<li>estimate breathing frequency;</li>
+<li>compare respiratory patterns between different users or exercise conditions.</li>
 </ul>
 <hr>
 </section>
-<section id="main-idea" class="level2">
-<h2 class="anchored" data-anchor-id="main-idea">Main Idea</h2>
-<p>The key idea of Air Analyzer is to place a barometric pressure sensor inside a sports mask in order to detect the small pressure variations caused by inhalation and exhalation.</p>
-<p>Instead of continuously transmitting data through Bluetooth or Wi-Fi, the system stores the acquired samples locally inside an EEPROM memory. After the recording session, the user can connect the device to a PC through USB-C and retrieve the stored data for offline analysis.</p>
-<p>This design choice reduces power consumption and makes the system suitable for battery-powered operation.</p>
-<hr>
-</section>
-<section id="system-concept" class="level2">
-<h2 class="anchored" data-anchor-id="system-concept">System Concept</h2>
-<p>The system is based on the following workflow:</p>
-<pre class="text"><code>Breathing activity
-        ↓
-Pressure variation inside the mask
-        ↓
-LPS22HBTR barometric pressure sensor
-        ↓
-STM32L052 microcontroller
-        ↓
-SPI EEPROM local memory
-        ↓
-USB-C data retrieval
-        ↓
-Offline analysis</code></pre>
-<hr>
-</section>
-<section id="design-goals" class="level2">
-<h2 class="anchored" data-anchor-id="design-goals">Design Goals</h2>
-<p>The main goals of the project are:</p>
+<section id="current-limitations" class="level2">
+<h2 class="anchored" data-anchor-id="current-limitations">Current Limitations</h2>
+<p>The current prototype focuses on validating the embedded acquisition and storage pipeline. Some aspects are still under development:</p>
 <ul>
-<li>acquire respiratory-related pressure signals during physical activity;</li>
-<li>reduce power consumption through an interrupt-driven firmware strategy;</li>
-<li>avoid continuous wireless transmission;</li>
-<li>store data locally during the recording session;</li>
-<li>retrieve data after the session through USB-C;</li>
-<li>design a compact PCB suitable for integration into a sports mask;</li>
-<li>provide a reproducible hardware and firmware platform.</li>
+<li>automatic data download from EEPROM through USB-C;</li>
+<li>complete post-processing software for respiratory-rate extraction;</li>
+<li>experimental validation during real physical activity;</li>
+<li>long-term power consumption measurements;</li>
+<li>mechanical optimization of the mask and PCB mounting.</li>
 </ul>
 <hr>
 </section>
-<section id="key-design-choices" class="level2">
-<h2 class="anchored" data-anchor-id="key-design-choices">Key Design Choices</h2>
-<p>Air Analyzer is based on three main design choices.</p>
-<section id="direct-pressure-sensing" class="level3">
-<h3 class="anchored" data-anchor-id="direct-pressure-sensing">Direct Pressure Sensing</h3>
-<p>The pressure sensor is placed directly inside the mask. This allows the system to detect breathing-related pressure variations without requiring chest belts, skin-contact electrodes, or external laboratory equipment.</p>
-</section>
-<section id="offline-data-storage" class="level3">
-<h3 class="anchored" data-anchor-id="offline-data-storage">Offline Data Storage</h3>
-<p>The system stores data locally on an SPI EEPROM. This avoids the need for continuous Bluetooth or Wi-Fi transmission, reducing energy consumption and simplifying the device architecture.</p>
-</section>
-<section id="low-power-interrupt-driven-firmware" class="level3">
-<h3 class="anchored" data-anchor-id="low-power-interrupt-driven-firmware">Low-Power Interrupt-Driven Firmware</h3>
-<p>The microcontroller spends most of the time in a low-power mode and wakes up only when needed. The sensor FIFO generates an interrupt when enough samples are available, allowing the firmware to read data in bursts instead of continuously polling the sensor.</p>
-<hr>
-</section>
-</section>
-<section id="main-components" class="level2">
-<h2 class="anchored" data-anchor-id="main-components">Main Components</h2>
-<p>The project includes three main parts:</p>
+<section id="future-work" class="level2">
+<h2 class="anchored" data-anchor-id="future-work">Future Work</h2>
+<p>Future improvements will focus on both firmware and system-level validation.</p>
+<p>Possible developments include:</p>
 <ul>
-<li><strong>Hardware</strong>: custom PCB with microcontroller, pressure sensor, EEPROM memory, power supply, and USB-C interface.</li>
-<li><strong>Firmware</strong>: interrupt-based embedded software for sensor acquisition, data storage, and communication.</li>
-<li><strong>Mechanical integration</strong>: sports mask structure designed to host the PCB and position the sensor correctly.</li>
+<li>implementing a complete USB-based data download tool;</li>
+<li>adding a structured memory management system for multiple recording sessions;</li>
+<li>improving the low-power strategy by using deeper sleep modes;</li>
+<li>validating the signal quality during different sports activities;</li>
+<li>comparing measurements between trained and untrained users;</li>
+<li>designing a more compact PCB revision;</li>
+<li>improving the mechanical integration of the electronics into the mask.</li>
 </ul>
-<hr>
-</section>
-<section id="repository-structure" class="level2">
-<h2 class="anchored" data-anchor-id="repository-structure">Repository Structure</h2>
-<p>The repository is organized as follows:</p>
-<pre class="text"><code>air_analyzer/
-├── embedded/
-├── micro_usb/
-├── docs/
-├── index.qmd
-├── overview.qmd
-├── hardware.qmd
-├── firmware.qmd
-├── usage.qmd
-└── README.md</code></pre>
-<p>The firmware implementation is mainly located inside the <code>micro_usb/</code> directory, while the Quarto documentation is generated inside the <code>docs/</code> folder.</p>
+<p>These improvements would make the system more robust, easier to use, and more suitable for experimental respiratory monitoring during real exercise sessions.</p>
 
 
 </section>
@@ -409,7 +456,7 @@ Offline analysis</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/AlessiaRinaldi\.github\.io\/air_analyzer\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -738,14 +785,11 @@ Offline analysis</code></pre>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Home">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Home</span>
+      <a href="./firmware.html" class="pagination-link" aria-label="Firmware">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Firmware</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./hardware.html" class="pagination-link" aria-label="Hardware">
-        <span class="nav-page-text">Hardware</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Firmware – Air Analyzer</title>
+<title>Air Analyzer</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./usage.html" rel="next">
-<link href="./hardware.html" rel="prev">
+<link href="./overview.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -83,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./firmware.html">Firmware</a></li><li class="breadcrumb-item"><a href="./firmware.html">Firmware</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Home</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -93,7 +92,7 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
@@ -109,7 +108,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="./index.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
@@ -158,7 +157,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./firmware.html" class="sidebar-item-text sidebar-link active">
+  <a href="./firmware.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Firmware</span></a>
   </div>
 </li>
@@ -186,38 +185,20 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#firmware-overview" id="toc-firmware-overview" class="nav-link active" data-scroll-target="#firmware-overview">Firmware Overview</a></li>
-  <li><a href="#development-environment" id="toc-development-environment" class="nav-link" data-scroll-target="#development-environment">Development Environment</a></li>
-  <li><a href="#project-structure" id="toc-project-structure" class="nav-link" data-scroll-target="#project-structure">Project Structure</a></li>
-  <li><a href="#firmware-architecture" id="toc-firmware-architecture" class="nav-link" data-scroll-target="#firmware-architecture">Firmware Architecture</a></li>
-  <li><a href="#initialization-phase" id="toc-initialization-phase" class="nav-link" data-scroll-target="#initialization-phase">Initialization Phase</a></li>
-  <li><a href="#low-power-main-loop" id="toc-low-power-main-loop" class="nav-link" data-scroll-target="#low-power-main-loop">Low-Power Main Loop</a></li>
-  <li><a href="#interrupt-driven-acquisition" id="toc-interrupt-driven-acquisition" class="nav-link" data-scroll-target="#interrupt-driven-acquisition">Interrupt-Driven Acquisition</a></li>
-  <li><a href="#pressure-data-format" id="toc-pressure-data-format" class="nav-link" data-scroll-target="#pressure-data-format">Pressure Data Format</a></li>
-  <li><a href="#external-memory-storage" id="toc-external-memory-storage" class="nav-link" data-scroll-target="#external-memory-storage">External Memory Storage</a></li>
-  <li><a href="#data-retrieval" id="toc-data-retrieval" class="nav-link" data-scroll-target="#data-retrieval">Data Retrieval</a></li>
-  <li><a href="#offline-processing" id="toc-offline-processing" class="nav-link" data-scroll-target="#offline-processing">Offline Processing</a></li>
-  <li><a href="#low-power-design-rationale" id="toc-low-power-design-rationale" class="nav-link" data-scroll-target="#low-power-design-rationale">Low-Power Design Rationale</a></li>
-  <li><a href="#current-firmware-summary" id="toc-current-firmware-summary" class="nav-link" data-scroll-target="#current-firmware-summary">Current Firmware Summary</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-page-right" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./firmware.html">Firmware</a></li><li class="breadcrumb-item"><a href="./firmware.html">Firmware</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Firmware</h1>
+<h1 class="title">Air Analyzer</h1>
 </div>
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page-right">
 
     
   
@@ -229,238 +210,205 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This section describes the embedded firmware of the <strong>Air Analyzer</strong> system.</p>
-<p>The firmware is designed to acquire the pressure signal generated by breathing inside the mask, store the raw samples locally, and reduce CPU activity during idle periods. The current implementation follows a simple low-power, interrupt-driven architecture based on <strong>STM32CubeMX</strong>, <strong>STM32 HAL</strong>, <strong>SPI</strong>, and <strong>DMA</strong>.</p>
-<hr>
-<section id="firmware-overview" class="level1">
-<h1>Firmware Overview</h1>
-<p>The firmware is built around three main ideas:</p>
-<ol type="1">
-<li>configure the pressure sensor once at startup;</li>
-<li>keep the main program inactive during idle time;</li>
-<li>handle acquisition and storage only when an event occurs.</li>
-</ol>
-<p>This approach avoids continuous CPU polling. The microcontroller remains mostly inactive and wakes only when data must be moved from the pressure sensor to the external memory.</p>
-<p>The current firmware acquires only the pressure signal. Temperature data are not acquired, because the respiratory waveform is extracted from pressure variations inside the mask.</p>
-<hr>
+<style>
+body {
+  background:
+    radial-gradient(circle at 12% 12%, rgba(56, 189, 248, 0.38), transparent 32%),
+    radial-gradient(circle at 88% 18%, rgba(14, 165, 233, 0.26), transparent 36%),
+    radial-gradient(circle at 78% 88%, rgba(34, 211, 238, 0.18), transparent 38%),
+    linear-gradient(135deg, #3f4358 0%, #717a8f 45%, #075985 100%) !important;
+  color: #f8fafc;
+}
+
+#quarto-content {
+  background:
+    radial-gradient(circle at 12% 12%, rgba(56, 189, 248, 0.38), transparent 32%),
+    radial-gradient(circle at 88% 18%, rgba(14, 165, 233, 0.26), transparent 36%),
+    radial-gradient(circle at 78% 88%, rgba(34, 211, 238, 0.18), transparent 38%),
+    linear-gradient(135deg, #3f4358 0%, #717a8f 45%, #075985 100%) !important;
+  min-height: 100vh;
+}
+
+.quarto-title-block {
+  display: none;
+}
+
+.page-columns .content {
+  max-width: 1200px;
+}
+
+.home-hero {
+  min-height: 70vh;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 3rem;
+  align-items: center;
+  padding: 4rem 1rem 2rem 1rem;
+}
+
+.home-title {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 900;
+  letter-spacing: -0.08em;
+  line-height: 0.95;
+  margin-bottom: 1.2rem;
+  color: #f8fafc;
+}
+
+.home-subtitle {
+  font-size: clamp(1.3rem, 2.5vw, 2rem);
+  font-weight: 500;
+  color: #bae6fd;
+  margin-bottom: 1.5rem;
+}
+
+.home-description {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #cbd5e1;
+  max-width: 650px;
+}
+
+.hero-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-image img {
+  width: min(100%, 430px);
+  border-radius: 32px;
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.45),
+    0 0 80px rgba(56, 189, 248, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  color: #f8fafc;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  margin-bottom: 4rem;
+}
+
+.home-card {
+  min-height: 220px;
+  padding: 1.5rem;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.home-card:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 28px 65px rgba(0, 0, 0, 0.35);
+}
+
+.home-card h3 {
+  color: #f8fafc;
+  font-size: 1.35rem;
+  margin-bottom: 0.8rem;
+}
+
+.home-card p {
+  color: #cbd5e1;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.home-card a {
+  display: inline-block;
+  margin-top: 0.8rem;
+  color: #7dd3fc;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.home-card a:hover {
+  color: #bae6fd;
+}
+
+@media (max-width: 1000px) {
+  .home-hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .home-description {
+    margin: 0 auto;
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 650px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-hero {
+    padding-top: 2rem;
+  }
+}
+</style>
+<div class="home-hero">
+<div class="hero-text">
+<div class="home-title">
+Air Analyzer
+</div>
+<div class="home-subtitle">
+Wearable Smart Mask for Breathing Activity Monitoring
+</div>
+<div class="home-description">
+<p>Air Analyzer is an embedded system designed to monitor breathing-related activity using a microcontroller-based architecture.</p>
+<p>The project focuses on sensor acquisition, firmware development, interrupt-based logic, and documentation of the embedded workflow.</p>
+</div>
+</div>
+<div class="hero-image">
+<p><img src="images/prova2.png" alt="Air Analyzer system overview"></p>
+</div>
+</div>
+<div class="section-title">
+Project Sections
+</div>
+<div class="card-grid">
+<section id="project-overview" class="level3 home-card">
+<h3 class="anchored" data-anchor-id="project-overview">Project Overview</h3>
+<p>General description of the Air Analyzer project, including motivation, objectives, and repository structure.</p>
+<p><a href="./overview.html">Open →</a></p>
 </section>
-<section id="development-environment" class="level1">
-<h1>Development Environment</h1>
-<p>The firmware was developed starting from an <strong>STM32CubeMX</strong> project.</p>
-<p>CubeMX was used to generate the basic configuration for:</p>
-<ul>
-<li>system clock;</li>
-<li>GPIO pins;</li>
-<li>SPI communication;</li>
-<li>DMA support;</li>
-<li>USART interface for debugging;</li>
-<li>USB interface for post-session communication.</li>
-</ul>
-<p>The application-specific code is added inside the user-code sections generated by CubeMX, so that the project can be regenerated without overwriting the custom firmware logic.</p>
-<hr>
+<section id="hardware" class="level3 home-card">
+<h3 class="anchored" data-anchor-id="hardware">Hardware</h3>
+<p>Description of the hardware architecture, sensor connections, microcontroller board, and physical setup.</p>
+<p><a href="./hardware.html">Open →</a></p>
 </section>
-<section id="project-structure" class="level1">
-<h1>Project Structure</h1>
-<p>The firmware is located mainly in the following project folder:</p>
-<pre class="text"><code>micro_usb/</code></pre>
-<p>The main application logic is located in:</p>
-<pre class="text"><code>micro_usb/Core/Src/main.c</code></pre>
-<p>The configuration and peripheral initialization files are generated by CubeMX and organized in the standard STM32 project structure.</p>
-<hr>
+<section id="firmware" class="level3 home-card">
+<h3 class="anchored" data-anchor-id="firmware">Firmware</h3>
+<p>Explanation of the embedded firmware, main source files, interrupt-based approach, and communication logic.</p>
+<p><a href="./firmware.html">Open →</a></p>
 </section>
-<section id="firmware-architecture" class="level1">
-<h1>Firmware Architecture</h1>
-<p>The firmware can be divided into three main parts:</p>
-<pre class="text"><code>Startup and initialization
-          ↓
-Low-power main loop
-          ↓
-Interrupt-driven acquisition and storage</code></pre>
-<p>The initialization code is executed only once when the device starts. After that, the firmware enters a cyclic acquisition workflow in which SPI transfers are performed using DMA and completed through interrupts.</p>
-<hr>
+<section id="usage" class="level3 home-card">
+<h3 class="anchored" data-anchor-id="usage">Usage</h3>
+<p>Instructions for cloning, building, flashing, and using the project.</p>
+<p><a href="./usage.html">Open →</a></p>
 </section>
-<section id="initialization-phase" class="level1">
-<h1>Initialization Phase</h1>
-<p>At startup, the microcontroller initializes the peripherals configured in STM32CubeMX. This includes the clock tree, GPIO pins, SPI interface, DMA controller, USB interface, and USART interface.</p>
-<p>After the peripheral setup, the pressure sensor is configured for continuous acquisition at <strong>10 Hz</strong>. This sampling frequency was chosen because it provides a large margin with respect to the expected respiratory frequency during physical activity, while keeping memory usage limited.</p>
-<p>Only the pressure output of the LPS22HBTR is acquired. The pressure value is provided by the sensor as a <strong>24-bit raw sample</strong>, so each acquired pressure sample occupies exactly <strong>3 bytes</strong>.</p>
-<p>Once the sensor has been configured, the first SPI acquisition is started. From this point on, the firmware operates in an event-driven way rather than continuously polling the sensor.</p>
-<hr>
-</section>
-<section id="low-power-main-loop" class="level1">
-<h1>Low-Power Main Loop</h1>
-<p>The main loop is intentionally kept almost empty.</p>
-<p>Instead of continuously checking whether new sensor data are available, the microcontroller waits for interrupts. During this waiting phase, the CPU can remain inactive, reducing unnecessary power consumption.</p>
-<p>This behavior is important for a wearable battery-powered system. The firmware does not require the processor to be active during the entire recording session. The CPU only needs to wake up briefly when a transfer is completed and a new pressure sample must be handled.</p>
-<p>The low-power strategy is therefore based on event-driven execution:</p>
-<pre class="text"><code>CPU waits
-   ↓
-DMA transfer completes
-   ↓
-Interrupt occurs
-   ↓
-Sample is stored
-   ↓
-CPU returns to waiting state</code></pre>
-<hr>
-</section>
-<section id="interrupt-driven-acquisition" class="level1">
-<h1>Interrupt-Driven Acquisition</h1>
-<p>The acquisition process is managed using SPI with DMA support.</p>
-<p>DMA allows the SPI peripheral to transfer data without requiring the CPU to manually handle every byte. When the transfer is complete, an interrupt is generated and the firmware processes the acquired sample.</p>
-<p>At each acquisition event, the firmware:</p>
-<ol type="1">
-<li>receives the raw pressure sample from the LPS22HBTR;</li>
-<li>extracts the useful pressure bytes;</li>
-<li>prepares the data for storage;</li>
-<li>writes the sample to the external EEPROM;</li>
-<li>starts the next acquisition cycle.</li>
-</ol>
-<p>This creates a cyclic acquisition pipeline in which the CPU is active only for short processing intervals.</p>
-<hr>
-</section>
-<section id="pressure-data-format" class="level1">
-<h1>Pressure Data Format</h1>
-<p>The LPS22HBTR pressure output is stored as a 24-bit raw value.</p>
-<p>The firmware stores this raw value directly in EEPROM without converting it to floating-point pressure values during acquisition. This choice reduces computational overhead and avoids unnecessary processing on the microcontroller.</p>
-<p>Each stored sample has the following size:</p>
-<pre class="text"><code>1 pressure sample = 3 bytes</code></pre>
-<p>The conversion to physical pressure values is performed later during offline analysis on a PC.</p>
-<p>The pressure conversion is:</p>
-<pre class="text"><code>pressure_hPa = raw_pressure / 4096</code></pre>
-<p>Storing raw samples is convenient because it preserves the full sensor resolution while minimizing memory usage.</p>
-<hr>
-</section>
-<section id="external-memory-storage" class="level1">
-<h1>External Memory Storage</h1>
-<p>The system uses an <strong>M95256 SPI EEPROM</strong> for local data storage.</p>
-<p>The EEPROM capacity is:</p>
-<pre class="text"><code>256 Kbit = 32 KB = 32768 bytes</code></pre>
-<p>Since each pressure sample occupies 3 bytes and the sampling frequency is 10 Hz, the approximate recording time is:</p>
-<pre class="text"><code>32768 bytes / (3 bytes/sample × 10 samples/s) ≈ 1092 s ≈ 18 min</code></pre>
-<p>This storage strategy avoids continuous wireless transmission during the recording session. Data are saved locally and can be retrieved after the session through the communication interface.</p>
-<hr>
-</section>
-<section id="data-retrieval" class="level1">
-<h1>Data Retrieval</h1>
-<p>During acquisition, the device does not continuously stream data to an external receiver.</p>
-<p>The recorded pressure samples are stored locally in EEPROM. After the recording session, the user can connect the device to a PC and download the stored data for offline processing.</p>
-<p>This design choice reduces power consumption because no Bluetooth or Wi-Fi transmission is required during exercise.</p>
-<hr>
-</section>
-<section id="offline-processing" class="level1">
-<h1>Offline Processing</h1>
-<p>The firmware does not compute the breathing frequency in real time.</p>
-<p>Instead, it stores the pressure waveform in raw format. The respiratory signal can then be analyzed offline to extract:</p>
-<ul>
-<li>inhalation and exhalation cycles;</li>
-<li>breathing frequency;</li>
-<li>pressure waveform shape;</li>
-<li>differences between subjects or exercise conditions.</li>
-</ul>
-<p>This separation between acquisition and analysis simplifies the embedded firmware and reduces the processing load on the microcontroller.</p>
-<hr>
-</section>
-<section id="low-power-design-rationale" class="level1">
-<h1>Low-Power Design Rationale</h1>
-<p>The firmware contributes to low-power operation through three main mechanisms.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Strategy</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Local storage</td>
-<td>Avoids continuous wireless transmission</td>
-</tr>
-<tr class="even">
-<td>DMA-based SPI communication</td>
-<td>Reduces CPU involvement during data transfer</td>
-</tr>
-<tr class="odd">
-<td>Interrupt-driven execution</td>
-<td>Keeps the CPU inactive during idle periods</td>
-</tr>
-</tbody>
-</table>
-<p>Together, these choices allow the firmware to acquire respiratory pressure data while limiting active processor time.</p>
-<hr>
-</section>
-<section id="current-firmware-summary" class="level1">
-<h1>Current Firmware Summary</h1>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Parameter</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Microcontroller</td>
-<td>STM32L052K8Tx</td>
-</tr>
-<tr class="even">
-<td>Firmware generation tool</td>
-<td>STM32CubeMX</td>
-</tr>
-<tr class="odd">
-<td>Main firmware file</td>
-<td><code>micro_usb/Core/Src/main.c</code></td>
-</tr>
-<tr class="even">
-<td>Sensor</td>
-<td>LPS22HBTR</td>
-</tr>
-<tr class="odd">
-<td>Acquired quantity</td>
-<td>Pressure only</td>
-</tr>
-<tr class="even">
-<td>Sensor interface</td>
-<td>SPI</td>
-</tr>
-<tr class="odd">
-<td>Transfer method</td>
-<td>DMA-based SPI</td>
-</tr>
-<tr class="even">
-<td>Sampling frequency</td>
-<td>10 Hz</td>
-</tr>
-<tr class="odd">
-<td>Stored sample format</td>
-<td>Raw 24-bit pressure</td>
-</tr>
-<tr class="even">
-<td>Bytes per sample</td>
-<td>3 bytes</td>
-</tr>
-<tr class="odd">
-<td>External memory</td>
-<td>M95256 SPI EEPROM</td>
-</tr>
-<tr class="even">
-<td>Recording duration</td>
-<td>Approximately 18 minutes</td>
-</tr>
-<tr class="odd">
-<td>Main low-power mechanism</td>
-<td>Interrupt-driven waiting loop</td>
-</tr>
-</tbody>
-</table>
-<hr>
+</div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -536,7 +484,7 @@ CPU returns to waiting state</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/AlessiaRinaldi\.github\.io\/air_analyzer\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -863,15 +811,12 @@ CPU returns to waiting state</code></pre>
     }
   });
   </script>
-<nav class="page-navigation">
+<nav class="page-navigation column-page-right">
   <div class="nav-page nav-page-previous">
-      <a href="./hardware.html" class="pagination-link" aria-label="Hardware">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Hardware</span>
-      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./usage.html" class="pagination-link" aria-label="Usage">
-        <span class="nav-page-text">Usage</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./overview.html" class="pagination-link" aria-label="Overview">
+        <span class="nav-page-text">Overview</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Hardware – Air Analyzer</title>
+<title>Firmware – Air Analyzer</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./firmware.html" rel="next">
-<link href="./overview.html" rel="prev">
+<link href="./usage.html" rel="next">
+<link href="./hardware.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -71,35 +71,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -112,7 +83,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./hardware.html">Hardware</a></li><li class="breadcrumb-item"><a href="./hardware.html">Hardware</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./firmware.html">Firmware</a></li><li class="breadcrumb-item"><a href="./firmware.html">Firmware</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -170,7 +141,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./hardware.html" class="sidebar-item-text sidebar-link active">
+  <a href="./hardware.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Hardware</span></a>
   </div>
 </li>
@@ -187,7 +158,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./firmware.html" class="sidebar-item-text sidebar-link">
+  <a href="./firmware.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Firmware</span></a>
   </div>
 </li>
@@ -220,31 +191,28 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#hardware-architecture" id="toc-hardware-architecture" class="nav-link active" data-scroll-target="#hardware-architecture">Hardware Architecture</a></li>
-  <li><a href="#main-components" id="toc-main-components" class="nav-link" data-scroll-target="#main-components">Main Components</a></li>
-  <li><a href="#microcontroller" id="toc-microcontroller" class="nav-link" data-scroll-target="#microcontroller">Microcontroller</a></li>
-  <li><a href="#pressure-sensor" id="toc-pressure-sensor" class="nav-link" data-scroll-target="#pressure-sensor">Pressure Sensor</a></li>
-  <li><a href="#external-memory" id="toc-external-memory" class="nav-link" data-scroll-target="#external-memory">External Memory</a></li>
-  <li><a href="#power-supply" id="toc-power-supply" class="nav-link" data-scroll-target="#power-supply">Power Supply</a></li>
-  <li><a href="#wired-interfaces" id="toc-wired-interfaces" class="nav-link" data-scroll-target="#wired-interfaces">Wired Interfaces</a>
-  <ul class="collapse">
-  <li><a href="#usb-c-connector" id="toc-usb-c-connector" class="nav-link" data-scroll-target="#usb-c-connector">USB-C connector</a></li>
-  <li><a href="#stdc14-and-uart-connector" id="toc-stdc14-and-uart-connector" class="nav-link" data-scroll-target="#stdc14-and-uart-connector">STDC14 and UART connector</a></li>
-  </ul></li>
-  <li><a href="#pcb-design" id="toc-pcb-design" class="nav-link" data-scroll-target="#pcb-design">PCB Design</a></li>
-  <li><a href="#pcb-design-choices" id="toc-pcb-design-choices" class="nav-link" data-scroll-target="#pcb-design-choices">PCB Design Choices</a></li>
-  <li><a href="#sampling-strategy" id="toc-sampling-strategy" class="nav-link" data-scroll-target="#sampling-strategy">Sampling Strategy</a></li>
-  <li><a href="#mechanical-integration" id="toc-mechanical-integration" class="nav-link" data-scroll-target="#mechanical-integration">Mechanical Integration</a></li>
-  <li><a href="#hardware-summary" id="toc-hardware-summary" class="nav-link" data-scroll-target="#hardware-summary">Hardware Summary</a></li>
+  <li><a href="#firmware-overview" id="toc-firmware-overview" class="nav-link active" data-scroll-target="#firmware-overview">Firmware Overview</a></li>
+  <li><a href="#development-environment" id="toc-development-environment" class="nav-link" data-scroll-target="#development-environment">Development Environment</a></li>
+  <li><a href="#project-structure" id="toc-project-structure" class="nav-link" data-scroll-target="#project-structure">Project Structure</a></li>
+  <li><a href="#firmware-architecture" id="toc-firmware-architecture" class="nav-link" data-scroll-target="#firmware-architecture">Firmware Architecture</a></li>
+  <li><a href="#initialization-phase" id="toc-initialization-phase" class="nav-link" data-scroll-target="#initialization-phase">Initialization Phase</a></li>
+  <li><a href="#low-power-main-loop" id="toc-low-power-main-loop" class="nav-link" data-scroll-target="#low-power-main-loop">Low-Power Main Loop</a></li>
+  <li><a href="#interrupt-driven-acquisition" id="toc-interrupt-driven-acquisition" class="nav-link" data-scroll-target="#interrupt-driven-acquisition">Interrupt-Driven Acquisition</a></li>
+  <li><a href="#pressure-data-format" id="toc-pressure-data-format" class="nav-link" data-scroll-target="#pressure-data-format">Pressure Data Format</a></li>
+  <li><a href="#external-memory-storage" id="toc-external-memory-storage" class="nav-link" data-scroll-target="#external-memory-storage">External Memory Storage</a></li>
+  <li><a href="#data-retrieval" id="toc-data-retrieval" class="nav-link" data-scroll-target="#data-retrieval">Data Retrieval</a></li>
+  <li><a href="#offline-processing" id="toc-offline-processing" class="nav-link" data-scroll-target="#offline-processing">Offline Processing</a></li>
+  <li><a href="#low-power-design-rationale" id="toc-low-power-design-rationale" class="nav-link" data-scroll-target="#low-power-design-rationale">Low-Power Design Rationale</a></li>
+  <li><a href="#current-firmware-summary" id="toc-current-firmware-summary" class="nav-link" data-scroll-target="#current-firmware-summary">Current Firmware Summary</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./hardware.html">Hardware</a></li><li class="breadcrumb-item"><a href="./hardware.html">Hardware</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./firmware.html">Firmware</a></li><li class="breadcrumb-item"><a href="./firmware.html">Firmware</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Hardware</h1>
+<h1 class="title">Firmware</h1>
 </div>
 
 
@@ -261,33 +229,141 @@ window.Quarto = {
 </header>
 
 
-<p>This section describes the hardware architecture of <strong>Air Analyzer</strong>, a low-power wearable system designed to acquire breathing-related pressure variations inside a sports mask, store the acquired data locally, and allow post-session data retrieval through a wired interface.</p>
-<p>The main design goal is to avoid continuous wireless transmission during acquisition. Pressure samples are stored in a local non-volatile memory and downloaded only after the recording session. This reduces the average power consumption and makes the system suitable for operation from a compact coin cell battery.</p>
+<p>This section describes the embedded firmware of the <strong>Air Analyzer</strong> system.</p>
+<p>The firmware is designed to acquire the pressure signal generated by breathing inside the mask, store the raw samples locally, and reduce CPU activity during idle periods. The current implementation follows a simple low-power, interrupt-driven architecture based on <strong>STM32CubeMX</strong>, <strong>STM32 HAL</strong>, <strong>SPI</strong>, and <strong>DMA</strong>.</p>
 <hr>
-<section id="hardware-architecture" class="level1">
-<h1>Hardware Architecture</h1>
-<p>The device is organized around a compact custom PCB that integrates power management, sensing, data storage, and communication interfaces.</p>
-<pre class="text"><code>CR2032 Battery
-      ↓
-Power Management Stage
-      ↓
-3.3 V Regulated Supply
-      ↓
-STM32L052 Microcontroller
-      ↓
-SPI Bus
- ┌───────────────┬──────────────────┐
- ↓               ↓                  ↓
-LPS22HBTR        M95256 EEPROM      USB-C / UART Interface
-Pressure Sensor  Local Memory       for post-session data retrieval and debugging
-
-</code></pre>
-<p>The pressure sensor is placed inside the mask volume in order to capture the small pressure fluctuations generated by inhalation and exhalation. The microcontroller acquires the pressure signal, stores the raw samples in the external EEPROM, and later makes the recorded data available for offline analysis.</p>
+<section id="firmware-overview" class="level1">
+<h1>Firmware Overview</h1>
+<p>The firmware is built around three main ideas:</p>
+<ol type="1">
+<li>configure the pressure sensor once at startup;</li>
+<li>keep the main program inactive during idle time;</li>
+<li>handle acquisition and storage only when an event occurs.</li>
+</ol>
+<p>This approach avoids continuous CPU polling. The microcontroller remains mostly inactive and wakes only when data must be moved from the pressure sensor to the external memory.</p>
+<p>The current firmware acquires only the pressure signal. Temperature data are not acquired, because the respiratory waveform is extracted from pressure variations inside the mask.</p>
 <hr>
 </section>
-<section id="main-components" class="level1">
-<h1>Main Components</h1>
-<p>The electronic system is built around the following components.</p>
+<section id="development-environment" class="level1">
+<h1>Development Environment</h1>
+<p>The firmware was developed starting from an <strong>STM32CubeMX</strong> project.</p>
+<p>CubeMX was used to generate the basic configuration for:</p>
+<ul>
+<li>system clock;</li>
+<li>GPIO pins;</li>
+<li>SPI communication;</li>
+<li>DMA support;</li>
+<li>USART interface for debugging;</li>
+<li>USB interface for post-session communication.</li>
+</ul>
+<p>The application-specific code is added inside the user-code sections generated by CubeMX, so that the project can be regenerated without overwriting the custom firmware logic.</p>
+<hr>
+</section>
+<section id="project-structure" class="level1">
+<h1>Project Structure</h1>
+<p>The firmware is located mainly in the following project folder:</p>
+<pre class="text"><code>micro_usb/</code></pre>
+<p>The main application logic is located in:</p>
+<pre class="text"><code>micro_usb/Core/Src/main.c</code></pre>
+<p>The configuration and peripheral initialization files are generated by CubeMX and organized in the standard STM32 project structure.</p>
+<hr>
+</section>
+<section id="firmware-architecture" class="level1">
+<h1>Firmware Architecture</h1>
+<p>The firmware can be divided into three main parts:</p>
+<pre class="text"><code>Startup and initialization
+          ↓
+Low-power main loop
+          ↓
+Interrupt-driven acquisition and storage</code></pre>
+<p>The initialization code is executed only once when the device starts. After that, the firmware enters a cyclic acquisition workflow in which SPI transfers are performed using DMA and completed through interrupts.</p>
+<hr>
+</section>
+<section id="initialization-phase" class="level1">
+<h1>Initialization Phase</h1>
+<p>At startup, the microcontroller initializes the peripherals configured in STM32CubeMX. This includes the clock tree, GPIO pins, SPI interface, DMA controller, USB interface, and USART interface.</p>
+<p>After the peripheral setup, the pressure sensor is configured for continuous acquisition at <strong>10 Hz</strong>. This sampling frequency was chosen because it provides a large margin with respect to the expected respiratory frequency during physical activity, while keeping memory usage limited.</p>
+<p>Only the pressure output of the LPS22HBTR is acquired. The pressure value is provided by the sensor as a <strong>24-bit raw sample</strong>, so each acquired pressure sample occupies exactly <strong>3 bytes</strong>.</p>
+<p>Once the sensor has been configured, the first SPI acquisition is started. From this point on, the firmware operates in an event-driven way rather than continuously polling the sensor.</p>
+<hr>
+</section>
+<section id="low-power-main-loop" class="level1">
+<h1>Low-Power Main Loop</h1>
+<p>The main loop is intentionally kept almost empty.</p>
+<p>Instead of continuously checking whether new sensor data are available, the microcontroller waits for interrupts. During this waiting phase, the CPU can remain inactive, reducing unnecessary power consumption.</p>
+<p>This behavior is important for a wearable battery-powered system. The firmware does not require the processor to be active during the entire recording session. The CPU only needs to wake up briefly when a transfer is completed and a new pressure sample must be handled.</p>
+<p>The low-power strategy is therefore based on event-driven execution:</p>
+<pre class="text"><code>CPU waits
+   ↓
+DMA transfer completes
+   ↓
+Interrupt occurs
+   ↓
+Sample is stored
+   ↓
+CPU returns to waiting state</code></pre>
+<hr>
+</section>
+<section id="interrupt-driven-acquisition" class="level1">
+<h1>Interrupt-Driven Acquisition</h1>
+<p>The acquisition process is managed using SPI with DMA support.</p>
+<p>DMA allows the SPI peripheral to transfer data without requiring the CPU to manually handle every byte. When the transfer is complete, an interrupt is generated and the firmware processes the acquired sample.</p>
+<p>At each acquisition event, the firmware:</p>
+<ol type="1">
+<li>receives the raw pressure sample from the LPS22HBTR;</li>
+<li>extracts the useful pressure bytes;</li>
+<li>prepares the data for storage;</li>
+<li>writes the sample to the external EEPROM;</li>
+<li>starts the next acquisition cycle.</li>
+</ol>
+<p>This creates a cyclic acquisition pipeline in which the CPU is active only for short processing intervals.</p>
+<hr>
+</section>
+<section id="pressure-data-format" class="level1">
+<h1>Pressure Data Format</h1>
+<p>The LPS22HBTR pressure output is stored as a 24-bit raw value.</p>
+<p>The firmware stores this raw value directly in EEPROM without converting it to floating-point pressure values during acquisition. This choice reduces computational overhead and avoids unnecessary processing on the microcontroller.</p>
+<p>Each stored sample has the following size:</p>
+<pre class="text"><code>1 pressure sample = 3 bytes</code></pre>
+<p>The conversion to physical pressure values is performed later during offline analysis on a PC.</p>
+<p>The pressure conversion is:</p>
+<pre class="text"><code>pressure_hPa = raw_pressure / 4096</code></pre>
+<p>Storing raw samples is convenient because it preserves the full sensor resolution while minimizing memory usage.</p>
+<hr>
+</section>
+<section id="external-memory-storage" class="level1">
+<h1>External Memory Storage</h1>
+<p>The system uses an <strong>M95256 SPI EEPROM</strong> for local data storage.</p>
+<p>The EEPROM capacity is:</p>
+<pre class="text"><code>256 Kbit = 32 KB = 32768 bytes</code></pre>
+<p>Since each pressure sample occupies 3 bytes and the sampling frequency is 10 Hz, the approximate recording time is:</p>
+<pre class="text"><code>32768 bytes / (3 bytes/sample × 10 samples/s) ≈ 1092 s ≈ 18 min</code></pre>
+<p>This storage strategy avoids continuous wireless transmission during the recording session. Data are saved locally and can be retrieved after the session through the communication interface.</p>
+<hr>
+</section>
+<section id="data-retrieval" class="level1">
+<h1>Data Retrieval</h1>
+<p>During acquisition, the device does not continuously stream data to an external receiver.</p>
+<p>The recorded pressure samples are stored locally in EEPROM. After the recording session, the user can connect the device to a PC and download the stored data for offline processing.</p>
+<p>This design choice reduces power consumption because no Bluetooth or Wi-Fi transmission is required during exercise.</p>
+<hr>
+</section>
+<section id="offline-processing" class="level1">
+<h1>Offline Processing</h1>
+<p>The firmware does not compute the breathing frequency in real time.</p>
+<p>Instead, it stores the pressure waveform in raw format. The respiratory signal can then be analyzed offline to extract:</p>
+<ul>
+<li>inhalation and exhalation cycles;</li>
+<li>breathing frequency;</li>
+<li>pressure waveform shape;</li>
+<li>differences between subjects or exercise conditions.</li>
+</ul>
+<p>This separation between acquisition and analysis simplifies the embedded firmware and reduces the processing load on the microcontroller.</p>
+<hr>
+</section>
+<section id="low-power-design-rationale" class="level1">
+<h1>Low-Power Design Rationale</h1>
+<p>The firmware contributes to low-power operation through three main mechanisms.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -295,218 +371,30 @@ Pressure Sensor  Local Memory       for post-session data retrieval and debuggin
 </colgroup>
 <thead>
 <tr class="header">
-<th>Component</th>
-<th>Role in the system</th>
+<th>Strategy</th>
+<th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>STM32L052K8Tx</strong></td>
-<td>Ultra-low-power ARM Cortex-M0+ microcontroller used to control acquisition, storage, and communication</td>
+<td>Local storage</td>
+<td>Avoids continuous wireless transmission</td>
 </tr>
 <tr class="even">
-<td><strong>LPS22HBTR</strong></td>
-<td>Barometric pressure sensor used to detect breathing-related pressure variations inside the mask</td>
+<td>DMA-based SPI communication</td>
+<td>Reduces CPU involvement during data transfer</td>
 </tr>
 <tr class="odd">
-<td><strong>M95256</strong></td>
-<td>256 Kbit SPI EEPROM used for local non-volatile data storage</td>
-</tr>
-<tr class="even">
-<td><strong>TPS61291</strong></td>
-<td>Low-power boost converter used to provide a regulated 3.3 V supply rail</td>
-</tr>
-<tr class="odd">
-<td><strong>CR2032 battery</strong></td>
-<td>Compact coin cell battery used as the main power source</td>
-</tr>
-<tr class="even">
-<td><strong>USB-C connector</strong></td>
-<td>Wired interface used for post-session data download</td>
-</tr>
-<tr class="odd">
-<td><strong>STDC14 / UART connector</strong></td>
-<td>Debug, programming, and serial communication connector used during development</td>
+<td>Interrupt-driven execution</td>
+<td>Keeps the CPU inactive during idle periods</td>
 </tr>
 </tbody>
 </table>
+<p>Together, these choices allow the firmware to acquire respiratory pressure data while limiting active processor time.</p>
 <hr>
 </section>
-<section id="microcontroller" class="level1">
-<h1>Microcontroller</h1>
-<p>The system uses the <strong>STM32L052K8Tx</strong>, an ultra-low-power microcontroller based on the ARM Cortex-M0+ core.</p>
-<p>This device was selected because it provides low-power operating modes, SPI peripherals, DMA support, native USB Full Speed support, and enough GPIO pins to manage the pressure sensor, the external EEPROM, chip-select lines, and debugging interfaces.</p>
-<p>In the Air Analyzer prototype, the microcontroller is responsible for:</p>
-<ul>
-<li>configuring the pressure sensor at startup;</li>
-<li>managing SPI communication with the pressure sensor and the EEPROM;</li>
-<li>using DMA-based transfers to reduce CPU activity during acquisition;</li>
-<li>storing pressure samples locally in the external memory;</li>
-<li>supporting post-session communication with a PC.</li>
-</ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/Micro.png" class="img-fluid figure-img" style="width:55.0%" alt="STM32L052 microcontroller schematic"></p>
-<figcaption>STM32L052 microcontroller schematic</figcaption>
-</figure>
-</div>
-<p><em>STM32L052 microcontroller with the surrounding hardware required for correct operation.</em></p>
-<hr>
-</section>
-<section id="pressure-sensor" class="level1">
-<h1>Pressure Sensor</h1>
-<p>The selected pressure sensor is the <strong>LPS22HBTR</strong> from STMicroelectronics. It is used to measure the pressure variations generated by breathing inside the mask. These variations form the respiratory waveform from which inhalation and exhalation cycles can be extracted during offline analysis.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/sensore_schematico.png" class="img-fluid figure-img" style="width:55.0%" alt="LPS22HBTR pressure sensor schematic"></p>
-<figcaption>LPS22HBTR pressure sensor schematic</figcaption>
-</figure>
-</div>
-<p><em>LPS22HBTR pressure sensor schematic section.</em></p>
-<p>Main characteristics used in the design are summarized below.</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Parameter</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Sensor type</td>
-<td>Barometric pressure sensor</td>
-</tr>
-<tr class="even">
-<td>Pressure range</td>
-<td>260–1260 hPa</td>
-</tr>
-<tr class="odd">
-<td>Relative accuracy</td>
-<td>±0.1 hPa</td>
-</tr>
-<tr class="even">
-<td>Pressure output</td>
-<td>24-bit raw value</td>
-</tr>
-<tr class="odd">
-<td>Pressure sensitivity</td>
-<td>4096 LSB/hPa</td>
-</tr>
-<tr class="even">
-<td>Interface</td>
-<td>SPI</td>
-</tr>
-<tr class="odd">
-<td>SPI clock</td>
-<td>up to 10 MHz</td>
-</tr>
-<tr class="even">
-<td>Selected sampling rate</td>
-<td>10 Hz</td>
-</tr>
-</tbody>
-</table>
-<p>Only the pressure output is acquired by the firmware. The sample is stored in raw 24-bit format, using 3 bytes per measurement. This avoids real-time floating-point conversion on the microcontroller and preserves the full sensor resolution for post-processing.</p>
-<hr>
-</section>
-<section id="external-memory" class="level1">
-<h1>External Memory</h1>
-<p>The system uses an <strong>M95256 SPI EEPROM</strong> for local data storage.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/memoria_schematico.png" class="img-fluid figure-img" style="width:50.0%" alt="M95256 SPI EEPROM schematic"></p>
-<figcaption>M95256 SPI EEPROM schematic</figcaption>
-</figure>
-</div>
-<p><em>256 Kbit SPI EEPROM used for local pressure data storage.</em></p>
-<p>The memory size is:</p>
-<pre class="text"><code>256 Kbit = 32 KB = 32768 bytes</code></pre>
-<p>Each pressure sample occupies 3 bytes, corresponding to the native 24-bit raw pressure output of the LPS22HBTR. At the selected sampling frequency of 10 Hz, the approximate recording duration is:</p>
-<p><span class="math display">\[
-T_{max} = \frac{32768\,\text{bytes}}{3\,\text{bytes/sample} \times 10\,\text{samples/s}}
-\approx 1092\,\text{s}
-\approx 18\,\text{min}
-\]</span></p>
-<p>This storage strategy avoids continuous wireless transmission during the acquisition phase. The device records data locally and transfers them to a PC only after the session has ended.</p>
-<hr>
-</section>
-<section id="power-supply" class="level1">
-<h1>Power Supply</h1>
-<p>The prototype is powered by a <strong>CR2032 coin cell battery</strong>. A <strong>TPS61291</strong> boost converter is used to provide a regulated 3.3 V rail to the electronic components.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/alimentazione.png" class="img-fluid figure-img" style="width:55.0%" alt="Power supply schematic with boost converter"></p>
-<figcaption>Power supply schematic</figcaption>
-</figure>
-</div>
-<p><em>Power supply schematic section used to provide the regulated 3.3 V rail.</em></p>
-<p>The power supply architecture was selected to support a compact wearable form factor. Since the system stores data locally and does not require continuous radio communication, the power budget is mainly determined by the sensor, the microcontroller activity, the EEPROM write operations, and the efficiency of the power management stage.</p>
-<hr>
-</section>
-<section id="wired-interfaces" class="level1">
-<h1>Wired Interfaces</h1>
-<section id="usb-c-connector" class="level2">
-<h2 class="anchored" data-anchor-id="usb-c-connector">USB-C connector</h2>
-<p>The <strong>USB-C connector</strong> is used for post-session communication with a PC. During a recording session, the system does not stream data continuously. Instead, pressure samples are stored in the external EEPROM and retrieved later.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/USB-C.png" class="img-fluid figure-img" style="width:50.0%" alt="USB-C interface schematic"></p>
-<figcaption>USB-C interface schematic</figcaption>
-</figure>
-</div>
-<p><em>USB-C connector used for post-session data retrieval.</em></p>
-</section>
-<section id="stdc14-and-uart-connector" class="level2">
-<h2 class="anchored" data-anchor-id="stdc14-and-uart-connector">STDC14 and UART connector</h2>
-<p>The board also includes a debug and development interface based on the <strong>STDC14 connector</strong> and a dedicated UART connector. These interfaces simplify firmware development, programming, and serial debugging.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/Connettore_UART.png" class="img-fluid figure-img" style="width:45.0%" alt="UART connector schematic"></p>
-<figcaption>UART connector schematic</figcaption>
-</figure>
-</div>
-<p><em>UART connector used for debugging and development communication.</em></p>
-<p>The STDC14 connector provides access to the SWD programming interface, reset line, supply reference, and serial communication lines. This allows the board to be programmed and tested without relying on the battery during development.</p>
-<hr>
-</section>
-</section>
-<section id="pcb-design" class="level1">
-<h1>PCB Design</h1>
-<p>A custom <strong>50 × 50 mm two-layer PCB</strong> was designed in KiCad. The board integrates the pressure sensor, microcontroller, EEPROM, power supply, wired communication connectors, test points, and mechanical mounting holes.</p>
-<p><img src="images/pcb_front.png" class="img-fluid" style="width:42.0%" alt="PCB front view"> <img src="images/pcb_retro.png" class="img-fluid" style="width:42.0%" alt="PCB back view"></p>
-<p><em>Front and back view of the custom Air Analyzer PCB.</em></p>
-<p>The compact form factor makes the board suitable for integration with the 3D-printed mask structure.</p>
-<hr>
-</section>
-<section id="pcb-design-choices" class="level1">
-<h1>PCB Design Choices</h1>
-<p>Several design choices were adopted to improve reliability and simplify development:</p>
-<ul>
-<li><strong>33 Ω series resistors</strong> on SPI lines to improve signal integrity and reduce ringing;</li>
-<li><strong>decoupling capacitors</strong> placed close to the power pins of each integrated circuit;</li>
-<li><strong>ground copper pour</strong> on both PCB layers to reduce noise and improve return paths;</li>
-<li><strong>test points</strong> on unused GPIO pins to support debugging and future extensions;</li>
-<li><strong>M2 mounting holes</strong> to simplify mechanical integration with the mask;</li>
-<li><strong>separate chip-select lines</strong> for the pressure sensor and the EEPROM, allowing both devices to share the same SPI bus safely.</li>
-</ul>
-<hr>
-</section>
-<section id="sampling-strategy" class="level1">
-<h1>Sampling Strategy</h1>
-<p>The respiratory signal has a relatively low frequency. During intense physical activity, breathing frequency can increase significantly, but it remains well below the selected acquisition frequency.</p>
-<p>A sampling rate of <strong>10 Hz</strong> was chosen to provide margin above the minimum Nyquist requirement while still keeping memory usage and power consumption limited. This rate allows the system to capture not only the breathing frequency, but also the overall shape of the pressure waveform associated with each respiratory cycle.</p>
-<p>Because each pressure sample is stored as a compact 3-byte raw value, the 32 KB EEPROM provides approximately <strong>18 minutes</strong> of recording time at 10 Hz.</p>
-<hr>
-</section>
-<section id="mechanical-integration" class="level1">
-<h1>Mechanical Integration</h1>
-<p>The electronics are intended to be integrated with a 3D-printed mask structure. The prototype is based on the open-source <a href="https://www.printables.com/model/30166-universal-mask-concept-with-seal">Universal Mask Concept with Seal</a> model.</p>
-<p>The mask provides a rigid and reproducible support for the sensing system. Placing the pressure sensor inside the mask volume allows the device to capture breathing-induced pressure variations directly, without requiring chest belts or skin-contact sensors.</p>
-<p>The PCB dimensions and mounting holes were selected to simplify mechanical integration with the mask while keeping the prototype compact and self-contained.</p>
-<hr>
-</section>
-<section id="hardware-summary" class="level1">
-<h1>Hardware Summary</h1>
+<section id="current-firmware-summary" class="level1">
+<h1>Current Firmware Summary</h1>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -520,51 +408,56 @@ T_{max} = \frac{32768\,\text{bytes}}{3\,\text{bytes/sample} \times 10\,\text{sam
 <td>STM32L052K8Tx</td>
 </tr>
 <tr class="even">
-<td>Pressure sensor</td>
+<td>Firmware generation tool</td>
+<td>STM32CubeMX</td>
+</tr>
+<tr class="odd">
+<td>Main firmware file</td>
+<td><code>micro_usb/Core/Src/main.c</code></td>
+</tr>
+<tr class="even">
+<td>Sensor</td>
 <td>LPS22HBTR</td>
 </tr>
 <tr class="odd">
-<td>Memory</td>
-<td>M95256 SPI EEPROM</td>
-</tr>
-<tr class="even">
-<td>Memory size</td>
-<td>256 Kbit / 32 KB</td>
-</tr>
-<tr class="odd">
-<td>Power source</td>
-<td>CR2032 battery</td>
-</tr>
-<tr class="even">
-<td>Voltage rail</td>
-<td>3.3 V regulated</td>
-</tr>
-<tr class="odd">
-<td>PCB size</td>
-<td>50 × 50 mm</td>
+<td>Acquired quantity</td>
+<td>Pressure only</td>
 </tr>
 <tr class="even">
 <td>Sensor interface</td>
 <td>SPI</td>
 </tr>
 <tr class="odd">
-<td>Data retrieval interface</td>
-<td>USB-C / UART</td>
+<td>Transfer method</td>
+<td>DMA-based SPI</td>
 </tr>
 <tr class="even">
 <td>Sampling frequency</td>
 <td>10 Hz</td>
 </tr>
 <tr class="odd">
-<td>Sample size</td>
-<td>3 bytes</td>
+<td>Stored sample format</td>
+<td>Raw 24-bit pressure</td>
 </tr>
 <tr class="even">
-<td>Estimated recording time</td>
-<td>about 18 minutes</td>
+<td>Bytes per sample</td>
+<td>3 bytes</td>
+</tr>
+<tr class="odd">
+<td>External memory</td>
+<td>M95256 SPI EEPROM</td>
+</tr>
+<tr class="even">
+<td>Recording duration</td>
+<td>Approximately 18 minutes</td>
+</tr>
+<tr class="odd">
+<td>Main low-power mechanism</td>
+<td>Interrupt-driven waiting loop</td>
 </tr>
 </tbody>
 </table>
+<hr>
 
 
 </section>
@@ -643,7 +536,7 @@ T_{max} = \frac{32768\,\text{bytes}}{3\,\text{bytes/sample} \times 10\,\text{sam
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/AlessiaRinaldi\.github\.io\/air_analyzer\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -972,13 +865,13 @@ T_{max} = \frac{32768\,\text{bytes}}{3\,\text{bytes/sample} \times 10\,\text{sam
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./overview.html" class="pagination-link" aria-label="Overview">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Overview</span>
+      <a href="./hardware.html" class="pagination-link" aria-label="Hardware">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Hardware</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./firmware.html" class="pagination-link" aria-label="Firmware">
-        <span class="nav-page-text">Firmware</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./usage.html" class="pagination-link" aria-label="Usage">
+        <span class="nav-page-text">Usage</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
