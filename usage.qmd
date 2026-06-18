@@ -130,23 +130,19 @@ Offline processing can be used to:
 
 ---
 
-## Current Limitations
+## Limitations and Future Work
 
-The current prototype focuses on validating the embedded acquisition and storage pipeline. Some aspects are still under development:
+The current prototype focuses on validating the embedded data acquisition and storage pipeline. For this reason, several aspects were not fully implemented or experimentally validated within the scope of this project.
 
-- automatic data download from EEPROM through USB-C;
-- complete post-processing software for respiratory-rate extraction;
-- experimental validation during real physical activity;
-- long-term power consumption measurements;
-- mechanical optimization of the mask and PCB mounting.
+The main limitations are:
 
----
+- automatic data download from EEPROM through USB-C was not implemented;
+- a complete post-processing software for respiratory-rate extraction was not developed;
+- the system was not experimentally validated during real physical activity;
+- long-term power consumption measurements were not performed;
+- the mechanical integration of the mask and PCB mounting still requires optimization.
 
-## Future Work
-
-Future improvements will focus on both firmware and system-level validation.
-
-Possible developments include:
+Future developments could focus on both firmware improvements and system-level validation. Possible extensions include:
 
 - implementing a complete USB-based data download tool;
 - adding a structured memory management system for multiple recording sessions;
