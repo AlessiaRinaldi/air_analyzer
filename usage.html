@@ -234,8 +234,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#acquisition-workflow" id="toc-acquisition-workflow" class="nav-link" data-scroll-target="#acquisition-workflow">Acquisition Workflow</a></li>
   <li><a href="#stored-data-format" id="toc-stored-data-format" class="nav-link" data-scroll-target="#stored-data-format">Stored Data Format</a></li>
   <li><a href="#post-processing" id="toc-post-processing" class="nav-link" data-scroll-target="#post-processing">Post-Processing</a></li>
-  <li><a href="#current-limitations" id="toc-current-limitations" class="nav-link" data-scroll-target="#current-limitations">Current Limitations</a></li>
-  <li><a href="#future-work" id="toc-future-work" class="nav-link" data-scroll-target="#future-work">Future Work</a></li>
+  <li><a href="#limitations-and-future-work" id="toc-limitations-and-future-work" class="nav-link" data-scroll-target="#limitations-and-future-work">Limitations and Future Work</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -351,22 +350,18 @@ PRESS_OUT_H</code></pre>
 </ul>
 <hr>
 </section>
-<section id="current-limitations" class="level2">
-<h2 class="anchored" data-anchor-id="current-limitations">Current Limitations</h2>
-<p>The current prototype focuses on validating the embedded acquisition and storage pipeline. Some aspects are still under development:</p>
+<section id="limitations-and-future-work" class="level2">
+<h2 class="anchored" data-anchor-id="limitations-and-future-work">Limitations and Future Work</h2>
+<p>The current prototype focuses on validating the embedded data acquisition and storage pipeline. For this reason, several aspects were not fully implemented or experimentally validated within the scope of this project.</p>
+<p>The main limitations are:</p>
 <ul>
-<li>automatic data download from EEPROM through USB-C;</li>
-<li>complete post-processing software for respiratory-rate extraction;</li>
-<li>experimental validation during real physical activity;</li>
-<li>long-term power consumption measurements;</li>
-<li>mechanical optimization of the mask and PCB mounting.</li>
+<li>automatic data download from EEPROM through USB-C was not implemented;</li>
+<li>a complete post-processing software for respiratory-rate extraction was not developed;</li>
+<li>the system was not experimentally validated during real physical activity;</li>
+<li>long-term power consumption measurements were not performed;</li>
+<li>the mechanical integration of the mask and PCB mounting still requires optimization.</li>
 </ul>
-<hr>
-</section>
-<section id="future-work" class="level2">
-<h2 class="anchored" data-anchor-id="future-work">Future Work</h2>
-<p>Future improvements will focus on both firmware and system-level validation.</p>
-<p>Possible developments include:</p>
+<p>Future developments could focus on both firmware improvements and system-level validation. Possible extensions include:</p>
 <ul>
 <li>implementing a complete USB-based data download tool;</li>
 <li>adding a structured memory management system for multiple recording sessions;</li>
